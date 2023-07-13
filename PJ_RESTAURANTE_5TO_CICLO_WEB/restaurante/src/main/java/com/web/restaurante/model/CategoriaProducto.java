@@ -24,6 +24,6 @@ public class CategoriaProducto {
 	@JsonIgnore
 	@OneToMany(mappedBy="tipo")
 	//Cada One to Many tiene siempre una lista de la otra tabla
-	private List<CategoriaProducto> listaCategoria;
+	private List<Producto> listaProductos;
 	
 }
