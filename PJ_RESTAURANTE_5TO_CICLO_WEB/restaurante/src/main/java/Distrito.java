@@ -1,6 +1,3 @@
-package com.web.restaurante.model;
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,13 +6,12 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "tb_tipo_usuario")
+@Table(name = "tb_distrito")
 @Data
-public class TipoUsuario {
-	
+public class Distrito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_tipo_usuario;
-	private String des_tipo_usuario;
+	private int id_distrito;
+	private String des_distrito;
 	
 }
