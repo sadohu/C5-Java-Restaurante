@@ -186,16 +186,17 @@
 							  </thead>
 							  <tbody>
 							 
-								<tr th:each="row:${lista}">
+								<tr th:each="row:${listaProductos}">
 								
-							      <td th:text="${row.codigo}"></td>
-							      <td th:text="${row.nombre}"></td>
+							      <td th:text="${row.id}"></td>
+							      <td th:text="${row.nom_producto}"></td>
 							    
-							      <td th:text="${row.stock}"></td>
-							      <td th:text="${row.precio}"></td>
-							      <td th:text="${row.fecha}"></td>
+							      <td th:text="${row.des_producto}"></td>
+							      <td th:text="${row.stock_producto}"></td>
+							      <td th:text="${row.preciouni_producto}"></td>
+							      <td th:text="${row.imagen_producto}"></td>
 							     
-							      <td th:text="${row.tipo.nombre}"></td>
+							      <td th:text="${row.tipo.des_categoria_producto}"></td>
 							      
 							      <td><a class="btn btn-info btn-editar" data-bs-toggle="modal" data-bs-target="#modalMedicamento"><i class="bi bi-pencil"></i></a></td>
 							      
