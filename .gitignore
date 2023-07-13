@@ -6,7 +6,6 @@
 .mvn/
 .bin/
 *.md
-*.cmd
 
 
 # Log file
