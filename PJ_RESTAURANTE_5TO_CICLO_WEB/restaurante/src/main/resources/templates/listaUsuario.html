@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="../static/include/head">
+
+	<title>REGISTRAR USUARIO</title>
+
+</head>
+
+<body>
+
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container pt-3 bg-light vh-100">
+		<div>
+			<h2>LISTA DE USUARIO</h2>
+		</div>
+		
+		<div>
+			<a href="agregarUsuario">NUEVO USUARIO</a>
+		</div>
+		
+		<div class="card">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>TIPO</th>
+						<th>NOMBRE</th>
+						<th>APELLIDO</th>
+						<th>DISTRITO</th>
+						<th>EMAIL</th>
+						<th>ESTADO</th>
+						<th>ACCIONES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="usuario : ${listaUsuario}">
+						<td th:text="${usuario.id_usuario}"></td>
+						<td th:text="${usuario.tipo_usuario.des_tipo_usuario}"></td>
+						<td th:text="${usuario.nom_usuario}"></td>
+						<td th:text="${usuario.ape_usuario}"></td>
+						<td th:text="${usuario.distrito_usuario.des_distrito}"></td>
+						<td th:text="${usuario.email_usuario}"></td>
+						<td th:text="${usuario.estado_usuario}"></td>
+						<td>
+							<a class="btn btn-primary" th:ref="@{actualizaUsuario/{id}(id=${usuario.id_usuario})}">EDITAR</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>
