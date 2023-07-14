@@ -1,11 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="../static/include/head">
-		<title>
-			
-		</title>
-	</head>
-	<body>
-		<div th:replace="../static/include/navbar"></div>
-	</body>
+
+<head th:replace="../static/include/head">
+	<title>USUARIO</title>
+</head>
+
+<body>
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container bg-light vh-100">
+		<div>
+			<h2>ACTUALIZAR USUARIO</h2>
+		</div>
+
+		<div>
+			<form th:action="@{/grabarUsuario}" th:object="${usuario}" method="POST">
+
+				<div class="d-flex flex-column gap-2">
+					<div class="row row-cols-3 ">
+						<div>
+							<label>ID</label>
+							<input class="form-control" th:field="*{id_usuario}" type="text" />
+						</div>
+						<div>
+							<label>FECHA REG</label>
+							<input class="form-control" th:field="*{fechareg_usuario}" type="date" />
+						</div>
+						<div>
+							<label>ESTADO</label>
+							<input class="form-control" th:field="*{estado_usuario}" type="text" />
+						</div>
+					</div>
+
+					<div class="row row-cols-2 g-2">
+
+						<div>
+							<label>NOMBRE</label>
+							<input class="form-control" th:field="*{nom_usuario}" type="text" />
+						</div>
+						<div>
+							<label>APELLIDO</label>
+							<input class="form-control" th:field="*{ape_usuario}" type="text" />
+						</div>
+						<div>
+							<label>TIPO</label>
+							<input class="form-control" th:field="*{tipo_usuario.id_tipo_usuario}"  type="text" />
+						</div>
+						<div>
+							<label>TELEFONO</label>
+							<input class="form-control" th:field="*{tel_usuario}" type="tel" />
+						</div>
+						<div>
+							<label>CELULAR</label>
+							<input class="form-control" th:field="*{cel_usuario}" type="tel" />
+						</div>
+						<div>
+							<label>DISTRITO</label>
+							<input class="form-control" th:field="*{distrito_usuario.id_distrito}"  type="text" />
+						</div>
+						<div>
+							<label>DIRECCION</label>
+							<input class="form-control" th:field="*{dir_usuario}" type="text" />
+						</div>
+						<div>
+							<label>DNI</label>
+							<input class="form-control" th:field="*{dni_usuario}" type="text" />
+						</div>
+						<div>
+							<label>EMAIL</label>
+							<input class="form-control" th:field="*{email_usuario}" type="email" />
+						</div>
+						<div>
+							<label>PASSWORD</label>
+							<input class="form-control" th:field="*{password_usuario}" type="text" />
+						</div>
+						<div>
+							<label>IMAGEN</label>
+							<input class="form-control" th:field="*{imagen_usuario}" type="file" />
+						</div>
+					</div>
+					<div>
+						<button class="btn btn-success" type="submit">GRABAR</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+
+</body>
+
 </html>

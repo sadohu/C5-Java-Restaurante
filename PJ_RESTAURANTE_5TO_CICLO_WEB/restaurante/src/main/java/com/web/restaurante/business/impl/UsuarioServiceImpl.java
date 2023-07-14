@@ -26,16 +26,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void adicionarUsuario(Usuario obj) {
+	public void registrarUsuario(Usuario obj) {
 		
 		repository.save(obj);
-	}
-
-	@Override
-	public void editarUsuario(Usuario obj) {
-		
-		repository.save(obj);
-		
 	}
 
 	@Override

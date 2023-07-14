@@ -1,6 +1,13 @@
 package com.web.restaurante.model;
 
-import java.util.Date;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.Date;
+
+import javax.imageio.stream.FileImageInputStream;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,47 +15,48 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "tb_usuario")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Usuario {
+public class Usuario implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_usuario")
 	private int id_usuario;
-	//private int id_tipo_usuario; //FORANEA (Muchos usuarios de un tipo)
+	@ManyToOne
+	@JoinColumn(name="id_tipo_usuario")
+	private TipoUsuario tipo_usuario;
 	private String nom_usuario;
 	private String ape_usuario;
 	private int tel_usuario;
 	private int cel_usuario;
-	//private int id_distrito; //FORANEA (Muchos usuario de un distrito )
+	@ManyToOne
+	@JoinColumn(name="id_distrito")
+	private Distrito distrito_usuario;
 	private String dir_usuario;
 	private String dni_usuario;
 	private String email_usuario;
 	private String password_usuario;
-	private byte[] imagen_usuario;
+	@Lob
+	private File imagen_usuario ;
 	private Date fechareg_usuario;
 	private Date fechaact_usuario;
 	private String estado_usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="id_tipo_usuario")
-	private TipoUsuario tipo_usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="id_distrito")
-	private Distrito distrito_usuario;
+	
+	
 }
