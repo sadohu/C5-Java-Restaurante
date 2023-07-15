@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlsn:th="http://www.thymeleaf.org">
+
+<head>
+
+	<div th:replace="../static/include/head"></div>
+
+	<title>LOGIN</title>
+</head>
+
+<body>
+
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container">
+
+
+		<div class="card shadow-lg col-10 mt-5 m-auto">
+
+			<div class="row row-cols-2 g-0">
+				
+				<div class="">
+					<img src="https://lenaycarbon.pe/assets/img/canto_grande_lenaycarbon.jpg" width="100%"
+						height="600px" />
+				</div>
+
+				<div class="">
+					
+					<div class="card-header">
+						<h2 class="card-title">INCIAR SESION</h2>
+					</div>
+
+					<div clasS="card-body ">
+
+						<span class="text-danger" th:if="${error}" th:text="${error}"></span>
+
+						<div class="">
+							<form th:action="@{/iniciarSesion}" th:object="${usuario}" method="POST">
+								<div class="row g-4 m-0 p-0">
+									<div class="row g-4 m-0 p-0">
+										<div>
+											<label>USUARIO</label>
+											<input class="form-control" th:field="*{cod_usuario}" type="text">
+										</div>
+										<div>
+											<label>USUARIO</label>
+											<input class="form-control" th:field="*{password_usuario}" type="password">
+										</div>
+									</div>
+									<div class="d-flex-lg gap-2">
+										<button type="submit" class="btn btn-success">INGRESAR</button>
+										<a th:href="@{registraUsuario}" class="btn btn-primary">REGISTRAR</a>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+
+</body>
+
+</html>

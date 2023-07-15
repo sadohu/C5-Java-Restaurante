@@ -43,6 +43,7 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_tipo_usuario")
 	private TipoUsuario tipo_usuario;
+	private String cod_usuario;
 	private String nom_usuario;
 	private String ape_usuario;
 	private String tel_usuario;

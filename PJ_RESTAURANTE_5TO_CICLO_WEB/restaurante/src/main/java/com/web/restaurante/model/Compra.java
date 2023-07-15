@@ -18,9 +18,9 @@ public class Compra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_compra;
 	private int id_pedido;
-	private int id_medioPago;
+	private int id_medio_pago;
 	private double monto_compra;
-	private Date fechaReg_compra;
+	private Date fechareg_compra;
 	private String estado_compra;
 	
 }

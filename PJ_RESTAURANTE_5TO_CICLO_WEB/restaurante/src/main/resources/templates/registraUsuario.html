@@ -8,9 +8,9 @@
 <body>
 	<div th:replace="../static/include/navbar"></div>
 
-	<div class="container-xl bg-light vh-100">
+	<div class="container bg-light vh-100">
 		<div>
-			<h2>ACTUALIZAR USUARIO</h2>
+			<h2>GESTIONAR USUARIO</h2>
 		</div>
 
 		<div>
@@ -42,6 +42,12 @@
 							<label>APELLIDO</label>
 							<input class="form-control" th:field="*{ape_usuario}" type="text" />
 						</div>
+						
+						<div>
+							<label>NOMBRE DE USUARIO</label>
+							<input class="form-control" th:field="*{cod_usuario}" type="text" />
+						</div>
+						
 						<div>
 							<label>TIPO</label>
 							<select th:field="*{tipo_usuario.id_tipo_usuario}" class="form-select">
