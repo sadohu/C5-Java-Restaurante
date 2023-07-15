@@ -73,7 +73,7 @@ public class UsuarioController {
 				
 				session.setAttribute("usuario", obj);
 				
-				return "redirect:/listaUsuario";
+				return "/index";
 			}
 		}
 		
