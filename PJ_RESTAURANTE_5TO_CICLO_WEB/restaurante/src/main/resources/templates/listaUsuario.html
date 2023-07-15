@@ -17,8 +17,9 @@
 		</div>
 
 		<div class="my-4">
-			<a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
+			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
 				href="agregarUsuario">NUEVO USUARIO</a>
+			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO USUARIO</a>
 		</div>
 
 		<div class="card">
@@ -31,6 +32,7 @@
 						<th>APELLIDO</th>
 						<th>DISTRITO</th>
 						<th>EMAIL</th>
+						<th>IMAGEN</th>
 						<th>ESTADO</th>
 						<th>ACCIONES</th>
 					</tr>
@@ -43,9 +45,14 @@
 						<td th:text="${usuario.ape_usuario}"></td>
 						<td th:text="${usuario.distrito_usuario.des_distrito}"></td>
 						<td th:text="${usuario.email_usuario}"></td>
+						<td>
+							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagen_usuario)}}"
+								width="100px" height="100px" />
+						</td>
 						<td th:text="${usuario.estado_usuario}"></td>
 						<td>
-							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.id_usuario})}" class="btn btn-primary" >EDITAR</a>
+							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.id_usuario})}"
+								class="btn btn-primary">EDITAR</a>
 						</td>
 					</tr>
 				</tbody>
@@ -67,7 +74,7 @@
 					<div>
 						<form th:action="@{grabarUsuario}" th:object="${usuario}" method="post">
 
-							<div class="d-flex flex-column gap-2">
+							<div class="d-flex flex-column gap-3">
 								<div class="row row-cols-3 ">
 									<div>
 										<label>ID</label>
@@ -75,11 +82,11 @@
 									</div>
 									<div>
 										<label>FECHA REG</label>
-										<input class="form-control"  type="text" />
+										<input class="form-control" type="text" />
 									</div>
 									<div>
 										<label>ESTADO</label>
-										<input class="form-control"  type="text" />
+										<input class="form-control" type="text" />
 									</div>
 								</div>
 
@@ -134,17 +141,19 @@
 										<input class="form-control" type="text" />
 									</div>
 								</div>
+
+								<div class="modal-footer">
+									<div>
+										<button type=submit class="btn btn-success">GRABAR</button>
+									</div>
+								</div>
+
 							</div>
+
 
 						</form>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<div>
-						<button type=submit class="btn btn-success">GRABAR</button>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>

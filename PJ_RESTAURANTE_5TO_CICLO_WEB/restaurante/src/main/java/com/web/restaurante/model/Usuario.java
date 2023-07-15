@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.Base64;
 
 import javax.imageio.stream.FileImageInputStream;
 
@@ -20,11 +21,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_usuario")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements Serializable {
@@ -41,8 +45,8 @@ public class Usuario implements Serializable {
 	private TipoUsuario tipo_usuario;
 	private String nom_usuario;
 	private String ape_usuario;
-	private int tel_usuario;
-	private int cel_usuario;
+	private String tel_usuario;
+	private String cel_usuario;
 	@ManyToOne
 	@JoinColumn(name="id_distrito")
 	private Distrito distrito_usuario;
@@ -51,7 +55,7 @@ public class Usuario implements Serializable {
 	private String email_usuario;
 	private String password_usuario;
 	@Lob
-	private File imagen_usuario ;
+	private byte[] imagen_usuario ;
 	private Date fechareg_usuario;
 	private Date fechaact_usuario;
 	private String estado_usuario;

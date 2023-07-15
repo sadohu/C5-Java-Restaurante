@@ -14,7 +14,7 @@
 		</div>
 
 		<div>
-			<form th:action="@{/grabarUsuario}" th:object="${usuario}" method="POST">
+			<form th:action="@{/grabarUsuario}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
 
 				<div class="d-flex flex-column gap-2">
 					<div class="row row-cols-3 ">
@@ -44,7 +44,9 @@
 						</div>
 						<div>
 							<label>TIPO</label>
-							<input class="form-control" th:field="*{tipo_usuario.id_tipo_usuario}"  type="text" />
+							<select th:field="*{tipo_usuario.id_tipo_usuario}" class="form-select">
+								<option th:each="tipoUsuario : ${listaTipoUsuario}" th:value="${tipoUsuario.id_tipo_usuario}" th:text="${tipoUsuario.des_tipo_usuario}"></option>
+							</select>
 						</div>
 						<div>
 							<label>TELEFONO</label>
@@ -56,7 +58,9 @@
 						</div>
 						<div>
 							<label>DISTRITO</label>
-							<input class="form-control" th:field="*{distrito_usuario.id_distrito}"  type="text" />
+							<select th:field="*{distrito_usuario}" class="form-select">
+								<option th:each="distrito : ${listaDistrito}" th:value="${distrito.id_distrito}" th:text="${distrito.des_distrito}"></option>
+							</select>
 						</div>
 						<div>
 							<label>DIRECCION</label>
@@ -76,7 +80,7 @@
 						</div>
 						<div>
 							<label>IMAGEN</label>
-							<input class="form-control" th:field="*{imagen_usuario}" type="file" />
+							<input class="form-control" name="imagen" type="file" th:field:"*{imagen_usuario}" />
 						</div>
 					</div>
 					<div>
