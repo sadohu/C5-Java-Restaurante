@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.model.Producto;
+import com.web.restaurante.reuzable.EncodeBase64;
 @Controller
 public class ProductoController {
 	@Autowired
@@ -17,6 +18,7 @@ public class ProductoController {
 	@GetMapping("/")
 	public String listadoEmpleados(Model model) {
 		model.addAttribute("listaProductos",service.listaProducto());
+		model.addAttribute("Base64",new  EncodeBase64());
 		return "producto";
 	}
 	@GetMapping("/nuevoProducto")

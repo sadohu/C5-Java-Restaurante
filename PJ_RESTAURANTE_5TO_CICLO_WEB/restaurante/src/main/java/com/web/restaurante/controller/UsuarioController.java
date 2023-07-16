@@ -58,7 +58,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/iniciarSesion")
-	private String iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model,HttpSession session) {
+	private String iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model) {
 		
 		List<Usuario> listaUsuario= service.listarUsuario(); 
 		String codigo_usuario = usuario.getCod_usuario();
@@ -67,11 +67,10 @@ public class UsuarioController {
 		for (Usuario obj :listaUsuario) {
 			if(obj.getCod_usuario().equals(codigo_usuario) && obj.getPassword_usuario().equals(password_usuario)) {
 				
-				//model.addAttribute("Base64",new EncodeBase64().base64ToString(obj.getImagen_usuario()));
 				model.addAttribute("accesoCorrecto",obj.getNom_usuario());
 				model.addAttribute("imagen_usuario",new EncodeBase64().base64ToString(obj.getImagen_usuario()));
 				
-				session.setAttribute("usuario", obj);
+				//session.setAttribute("usuario", obj);
 				
 				return "/index";
 			}

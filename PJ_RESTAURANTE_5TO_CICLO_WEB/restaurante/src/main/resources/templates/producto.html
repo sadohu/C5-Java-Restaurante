@@ -219,7 +219,9 @@
 						<td th:text="${row.des_producto}"></td>
 						<td th:text="${row.stock_producto}"></td>
 						<td th:text="${row.preciouni_producto}"></td>
-						<td th:text="${row.imagen_producto}"></td>
+						<td>
+							<img th:src="@{'data:image;base64, ' + ${Base64.base64ToString(row.imagen_producto)}}" width="100px" height="100px"/>
+						</td>
 
 						<td th:text="${row.tipo.des_categoria_producto}"></td>
 
