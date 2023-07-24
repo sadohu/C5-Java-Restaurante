@@ -8,7 +8,10 @@ import com.web.restaurante.business.TipoColaboradorService;
 import com.web.restaurante.model.TipoColaborador;
 import com.web.restaurante.repository.TipoColaboradorRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class TipoColaboradorServiceImpl implements TipoColaboradorService {
 
 	private TipoColaboradorRepository tipoColaboradorRepository;
