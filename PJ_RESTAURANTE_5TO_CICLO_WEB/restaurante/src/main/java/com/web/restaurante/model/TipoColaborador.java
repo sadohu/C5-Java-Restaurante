@@ -1,9 +1,15 @@
 package com.web.restaurante.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -16,5 +22,9 @@ public class TipoColaborador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_tipo_colaborador;
 	private String des_tipo_colaborador;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "tipo_colaborador")
+	private List<Colaborador> listaColaborador;
 	
 }
