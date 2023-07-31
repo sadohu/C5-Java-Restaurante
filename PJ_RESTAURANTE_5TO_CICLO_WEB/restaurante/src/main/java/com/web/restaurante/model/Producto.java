@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 @Entity
-@Table(name="producto")
+@Table(name="tb_producto")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
