@@ -23,7 +23,7 @@ public class TipoColaboradorServiceImpl implements TipoColaboradorService {
 
 	@Override
 	public TipoColaborador buscar(int id) {
-		return tipoColaboradorRepository.finByIdTipoColaborador(id);
+		return tipoColaboradorRepository.findById(id);
 	}
 
 	@Override

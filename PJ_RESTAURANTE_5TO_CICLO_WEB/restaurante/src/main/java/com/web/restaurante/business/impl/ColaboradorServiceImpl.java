@@ -23,7 +23,7 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 
 	@Override
 	public Colaborador buscar(int id) {
-		return colaboradorRepository.finByIdColaborador(id);
+		return colaboradorRepository.findById(id);
 	}
 
 	@Override

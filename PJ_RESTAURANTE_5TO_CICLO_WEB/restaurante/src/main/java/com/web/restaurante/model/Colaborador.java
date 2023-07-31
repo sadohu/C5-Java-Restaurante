@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.context.annotation.Primary;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Entity
 @Table(name="tb_colaborador")
 
 @Data
@@ -24,10 +26,11 @@ import lombok.NoArgsConstructor;
 public class Colaborador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_colaborador;
+	@Column(name="id_colaborador")
+	private int id;
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_colaborador")
-	private int tipo_colaborador;
+	private TipoColaborador tipo_colaborador;
 	private String nom_colaborador;
 	private String ape_colaborador;
 	private String dni_colaborador;
