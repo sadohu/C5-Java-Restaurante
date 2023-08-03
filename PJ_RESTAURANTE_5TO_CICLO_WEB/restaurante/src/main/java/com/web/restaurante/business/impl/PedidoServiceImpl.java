@@ -27,9 +27,9 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public void registrarPedido(Pedido obj) {
+	public void registrarPedido(Pedido pedido) {
 		
-		repository.save(obj);	
+		repository.save(pedido);	
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public Pedido buscarPedido(int id) {
+	public Pedido listaPedidoPorId(int id) {
 		// TODO Auto-generated method stub
 		Optional<Pedido> optional = repository.findById(id);
 		Pedido obj = null;
