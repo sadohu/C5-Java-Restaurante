@@ -17,7 +17,7 @@ public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService
 	}
 
 	@Override
-	public Direntrega_Usuario buscar(int id) {
+	public Direntrega_Usuario buscar(int idHeredado, int idPropio) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,9 +35,11 @@ public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public void eliminar(int idHeredado, int idPropio) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

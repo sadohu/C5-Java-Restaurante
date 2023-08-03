@@ -24,4 +24,8 @@ public class Distrito {
 	@OneToMany(mappedBy = "distrito_usuario")
 	private List<Usuario> listaUsuario;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "idDirentrega")
+	private List<Direntrega_Usuario> listaDirentrega;
+	
 }

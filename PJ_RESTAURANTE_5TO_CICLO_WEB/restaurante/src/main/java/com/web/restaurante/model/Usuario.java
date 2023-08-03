@@ -7,8 +7,11 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.Base64;
+import java.util.List;
 
 import javax.imageio.stream.FileImageInputStream;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +21,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +42,6 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_usuario")
 	private int id_usuario;
 	@ManyToOne
 	@JoinColumn(name="id_tipo_usuario")
@@ -61,7 +64,9 @@ public class Usuario implements Serializable {
 	private Date fechaact_usuario;
 	private String estado_usuario;
 	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "idUsuario")
+	private List<Direntrega_Usuario> listaDirentrega;
 	
 	
 }

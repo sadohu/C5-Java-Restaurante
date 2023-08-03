@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.restaurante.business.ColaboradorService;
 import com.web.restaurante.business.PedidoService;
@@ -18,16 +17,15 @@ import com.web.restaurante.model.Pedido;
 import com.web.restaurante.reuzable.EncodeBase64;
 
 @Controller
-@SessionAttributes("session")
 public class PedidoController {
 	
 	@Autowired
 	private PedidoService pedidoservice;
-	@Autowired
+	@Autowired (required = false)
 	private UsuarioService service;
-	@Autowired
+	@Autowired (required = false)
 	private ColaboradorService colaboradorservice;
-	@Autowired
+	//@Autowired
 	// private falta direntrega 	
 	
 	@GetMapping("/")

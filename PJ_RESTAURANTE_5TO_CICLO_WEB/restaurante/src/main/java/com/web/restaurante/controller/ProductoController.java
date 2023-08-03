@@ -15,7 +15,7 @@ public class ProductoController {
 	@Autowired
 	private ProductoService service;
 	
-	@GetMapping("/")
+	@GetMapping("/1")
 	public String listadoEmpleados(Model model) {
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("Base64",new  EncodeBase64());
