@@ -15,7 +15,9 @@ public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService
 	
 	@Override
 	public List<Direntrega_Usuario> listar() {
-		return direntrega_usuarioRepository.findAll();
+		
+		return null;
+		//return direntrega_usuarioRepository.findAll();
 	}
 
 	@Override

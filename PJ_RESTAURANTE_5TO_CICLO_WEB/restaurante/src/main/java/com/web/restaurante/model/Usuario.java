@@ -72,7 +72,7 @@ public class Usuario implements Serializable {
 	private String estadoUsuario;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "idUsuario")
+	@OneToMany(mappedBy = "usuario")
 	private List<Direntrega_Usuario> listaDirentrega;
 	
 	
