@@ -20,10 +20,10 @@ public class ProductoController {
 	@Autowired
 	private CategoriaProService serviceCat;
 	
-	@GetMapping("/1istaProducto")
+	@GetMapping("/listaProducto")
 	public String listadoEmpleados(Model model) {
 		model.addAttribute("listaProductos",service.listaProducto());
-		model.addAttribute("Base64",new  EncodeBase64());
+		//model.addAttribute("Base64",new  EncodeBase64());
 		return "producto";
 	}
 	@GetMapping("/nuevoProducto")
@@ -43,8 +43,8 @@ public class ProductoController {
 	public String registroProducto(@ModelAttribute("producto") Producto producto) {
 		
 		service.registrarProducto(producto);
-	
-		return "redirect:/";
+		return "redirect:/listaProducto";
+		/* return "redirect:/"; */
 	}
 	
 	@GetMapping("/actualizaProducto/{id}") 
@@ -57,7 +57,8 @@ public class ProductoController {
 		 
 	
 		model.addAttribute("producto",producto);
-		model.addAttribute("categoriaId",producto.getCategoriaProducto().getIdCategoriaProducto());
+		//model.addAttribute("categoriaId",producto.getCategoriaProducto().getIdCategoriaProducto());
+		model.addAttribute("categoriaId",producto.getCate().getIdCategoriaProducto());
 		//y redireccionamos a la vista o html actualizaProducto
 		return "actualizaProducto";
 	}
@@ -65,8 +66,8 @@ public class ProductoController {
 	public String eliminaProducto(@PathVariable(value="id") int id) {
 		
 		service.eliminarProducto(id);
-
-		return "redirect:/";
+		return "redirect:/listaProducto";
+		/* return "redirect:/"; */
 	}
 	
 	

@@ -100,17 +100,17 @@
 							 
 								<tr th:each="row:${listaProductos}">
 								
-							      <td th:text="${row.id}"></td>
-							      <td th:text="${row.nom_producto}"></td>
+							      <td th:text="${row.idProducto}"></td>
+							      <td th:text="${row.nomProducto}"></td>
 							    
-							      <td th:text="${row.des_producto}"></td>
-							      <td th:text="${row.stock_producto}"></td>
-							      <td th:text="${row.preciouni_producto}"></td>
-							      <td th:text="${row.imagen_producto}"></td>
+							      <td th:text="${row.desProducto}"></td>
+							      <td th:text="${row.stockProducto}"></td>
+							      <td th:text="${row.preciouniProducto}"></td>
+							      <td th:text="${row.imagenProducto}"></td>
 							     
-							      <td th:text="${row.tipo.des_categoria_producto}"></td>
+							      <td th:text="${row.cate.desCategoriaProducto}"></td>
 							      
-							      <td><a th:href="@{/actualizaProducto/{id}(id=${row.id})}"  class="btn btn-info btn-editar"><i class="bi bi-pencil"></i></a></td>
+							      <td><a th:href="@{/actualizaProducto/{id}(id=${row.idProducto})}"  class="btn btn-info btn-editar"><i class="bi bi-pencil"></i></a></td>
 							      
 							      <td><a class="btn btn-danger btn-eliminar"><i class="bi bi-trash-fill"></i></a></td>
 							    </tr> 

@@ -23,9 +23,8 @@ public class CategoriaProducto {
 	private int idCategoriaProducto;
 	@Column(name="des_categoria_producto")
 	private String desCategoriaProducto;
-	
 	@JsonIgnore
-	@OneToMany(mappedBy="categoriaProducto")
+	@OneToMany(mappedBy="cate")
 	//Cada One to Many tiene siempre una lista de la otra tabla
 	private List<Producto> listaProductos;
 	

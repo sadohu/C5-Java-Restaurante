@@ -27,7 +27,7 @@ public class Producto {
 	private int idProducto;
 	@Column(name = "nom_producto")
 	private String nomProducto;
-	@Column(name ="des_produccto")
+	@Column(name ="des_producto")
 	private String desProducto;
 	@Column(name = "preciouni_producto")
 	private double preciouniProducto;
@@ -42,7 +42,7 @@ public class Producto {
 	@ManyToOne
 	@JoinColumn(name="id_categoria_producto")
 	//variable ASOCIACION ENTRE TABLAS este es un Objeto de CategoriaProducto
-	private CategoriaProducto categoriaProducto;//Donde este nombre tipo es la ASOCIACION
+	private CategoriaProducto cate;//Donde este nombre tipo es la ASOCIACION
 	//Debe estar en las 2 entidades
 	
 }

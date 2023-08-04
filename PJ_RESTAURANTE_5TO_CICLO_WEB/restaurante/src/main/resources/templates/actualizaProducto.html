@@ -12,23 +12,27 @@
 
 <form th:action="@{/guardarProducto}" th:object="${producto}" method="post">
 
-	<input type="hidden" th:field="*{id}"/>
+	<input type="hidden" th:field="*{idProducto}"/>
 
-	<input type="text" th:field="*{nom_producto}" placeholder="Ingrese nombre" class="form-control mb-4 col-4"/>
-	<input type="text" th:field="*{des_producto}" placeholder="Ingrese Descripción" class="form-control mb-4 col-4"/>
-	<input type="text" th:field="*{preciouni_producto}" placeholder="Ingrese Precio" class="form-control mb-4 col-4"/>
-	<input type="text" th:field="*{stock_producto}" placeholder="Ingrese Stock" class="form-control mb-4 col-4"/>
-	<input type="text" th:field="*{imagen_producto}" placeholder="Ingrese Imagen" class="form-control mb-4 col-4"/>
-	<input type="text" th:field="*{estado_producto}" placeholder="Ingrese estado" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{nomProducto}" placeholder="Ingrese nombre" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{desProducto}" placeholder="Ingrese Descripción" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{preciouniProducto}" placeholder="Ingrese Precio" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{stockProducto}" placeholder="Ingrese Stock" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{imagenProducto}" placeholder="Ingrese Imagen" class="form-control mb-4 col-4"/>
+	<input type="text" th:field="*{estadoProducto}" placeholder="Ingrese estado" class="form-control mb-4 col-4"/>
 	
 	<div class="form-group col-md-6">
 				    <label for="validationCustomUsername" class="form-label fw-bold">Categoria Producto</label>
 				    <div class="input-group has-validation">
-									
-				      <select class="form-select form-control" name="tipo" id="idTipo">
+									<!--el name de este select osea el cate debe ser igual a 
+				     							@JoinColumn(name="id_categoria_producto")
+								//variable ASOCIACION ENTRE TABLAS este es un Objeto de CategoriaProducto
+								private CategoriaProducto cate; a cate que lo parsea-->
+				      <select class="form-select form-control" name="cate" id="idTipo">
 					  <option value=" ">[Seleccione Categoria]</option>
 					   
-					  <option th:each="bean:${cate}" th:utext="${bean.des_categoria_producto}" th:value="${bean.id_categoria_producto}" th:selected="${categoriaId == bean.id_categoria_producto}"/>
+					  <!--<option th:each="bean:${cate}" th:utext="${bean.des_categoria_producto}" th:value="${bean.id_categoria_producto}" th:selected="${categoriaId == bean.id_categoria_producto}"/>-->
+					  <option th:each="bean:${cate}" th:utext="${bean.desCategoriaProducto}" th:value="${bean.idCategoriaProducto}" th:selected="${categoriaId == bean.idCategoriaProducto}"/>
 					</select>
 					
 				    </div>
