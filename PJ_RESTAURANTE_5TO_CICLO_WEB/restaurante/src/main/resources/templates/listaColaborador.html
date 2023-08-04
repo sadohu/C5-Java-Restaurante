@@ -18,8 +18,8 @@
 
 		<div class="my-4">
 			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
-				href="agregarUsuario">NUEVO COLABORADOR</a>
-			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO COLABORADOR</a>
+				href="">NUEVO COLABORADOR</a>
+			<a class="btn btn-success" th:href="@{nuevoColaborador}">NUEVO COLABORADOR</a>
 		</div>
 
 		<div class="card table-responsive">
@@ -40,8 +40,8 @@
 					<tr th:each="colaborador : ${listaColaborador}">
 						<td th:text="${colaborador.idColaborador}"></td>
 						<td th:text="${colaborador.tipoColaborador.desTipoColaborador}"></td>
-						<td th:text="${colaborador.nomUsuario}"></td>
-						<td th:text="${colaborador.apeUsuario}"></td>
+						<td th:text="${colaborador.nomColaborador}"></td>
+						<td th:text="${colaborador.apeColaborador}"></td>
 						<td th:text="${colaborador.dniColaborador}"></td>
 						<td>
 							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(colaborador.imagenColaborador)}}"

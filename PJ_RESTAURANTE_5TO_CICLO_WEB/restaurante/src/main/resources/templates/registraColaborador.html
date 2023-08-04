@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="../static/include/head">
-	<title>USUARIO</title>
+<head>
+	<div th:replace="../static/include/head"></div>
+	<title>COLABORADOR</title>
 </head>
 
 <body>
@@ -10,25 +11,25 @@
 
 	<div class="container bg-light vh-100">
 		<div>
-			<h2>GESTIONAR USUARIO</h2>
+			<h2>GESTIONAR COLABORADOR</h2>
 		</div>
 
 		<div>
-			<form th:action="@{/grabarUsuario}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
+			<form th:action="@{/grabarColaborador}" th:object="${colaborador}" method="POST" enctype="multipart/form-data">
 
 				<div class="d-flex flex-column gap-2">
 					<div class="row row-cols-3 ">
 						<div>
 							<label>ID</label>
-							<input class="form-control" th:field="*{idUsuario}" type="text" />
+							<input class="form-control" th:field="*{idColaborador}" type="text" />
 						</div>
 						<div>
 							<label>FECHA REG</label>
-							<input class="form-control" th:field="*{fecharegUsuario}" type="date" />
+							<input class="form-control" th:field="*{fecharegColaborador}" type="date" />
 						</div>
 						<div>
 							<label>ESTADO</label>
-							<input class="form-control" th:field="*{estadoUsuario}" type="text" />
+							<input class="form-control" th:field="*{estadoColaborador}" type="text" />
 						</div>
 					</div>
 
@@ -36,57 +37,26 @@
 
 						<div>
 							<label>NOMBRE</label>
-							<input class="form-control" th:field="*{nomUsuario}" type="text" />
+							<input class="form-control" th:field="*{nomColaborador}" type="text" />
 						</div>
 						<div>
 							<label>APELLIDO</label>
-							<input class="form-control" th:field="*{apeUsuario}" type="text" />
+							<input class="form-control" th:field="*{apeColaborador}" type="text" />
 						</div>
 						
-						<div>
-							<label>NOMBRE DE USUARIO</label>
-							<input class="form-control" th:field="*{codUsuario}" type="text" />
-						</div>
-						
-						<div>
-							<label>TIPO</label>
-							<select th:field="*{tipoUsuario.idTipoUsuario}" class="form-select">
-								<option th:each="tipoUsuario : ${listaTipoUsuario}" th:value="${tipoUsuario.idTipoUsuario}" th:text="${tipoUsuario.desTipoUsuario}"></option>
-							</select>
-						</div>
-						<div>
-							<label>TELEFONO</label>
-							<input class="form-control" th:field="*{telUsuario}" type="tel" />
-						</div>
-						<div>
-							<label>CELULAR</label>
-							<input class="form-control" th:field="*{celUsuario}" type="tel" />
-						</div>
-						<div>
-							<label>DISTRITO</label>
-							<select th:field="*{distritoUsuario}" class="form-select">
-								<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}" th:text="${distrito.desDistrito}"></option>
-							</select>
-						</div>
-						<div>
-							<label>DIRECCION</label>
-							<input class="form-control" th:field="*{dirUsuario}" type="text" />
-						</div>
 						<div>
 							<label>DNI</label>
-							<input class="form-control" th:field="*{dniUsuario}" type="text" />
+							<input class="form-control" th:field="*{dniColaborador}" type="text" />
 						</div>
 						<div>
-							<label>EMAIL</label>
-							<input class="form-control" th:field="*{emailUsuario}" type="email" />
-						</div>
-						<div>
-							<label>PASSWORD</label>
-							<input class="form-control" th:field="*{passwordUsuario}" type="text" />
+							<label>TIPO</label>
+							<select th:field="*{tipoColaborador.idTipoColaborador}" class="form-select">
+								<option th:each="tipoColaborador : ${listaTipoColaborador}" th:value="${tipoColaborador.idTipoColaborador}" th:text="${tipoColaborador.desTipoColaborador}"></option>
+							</select>
 						</div>
 						<div>
 							<label>IMAGEN</label>
-							<input class="form-control" name="imagen" type="file" th:field:"*{imagenUsuario}" />
+							<input class="form-control" name="imagen" type="file" th:field:"*{imagenColaborador}" />
 						</div>
 					</div>
 					<div>
