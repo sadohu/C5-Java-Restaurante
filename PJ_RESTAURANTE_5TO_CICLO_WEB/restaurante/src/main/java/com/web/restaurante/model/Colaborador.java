@@ -29,7 +29,7 @@ public class Colaborador {
 	private int idColaborador;
 
 	@ManyToOne
-	@JoinColumn(name = "id_tipo_colaborador")
+	@JoinColumn(name="id_tipo_colaborador")
 	private TipoColaborador tipoColaborador;
 	@Column(name = "nom_colaborador")
 	private String nomColaborador;
@@ -37,8 +37,8 @@ public class Colaborador {
 	private String apeColaborador;
 	@Column(name = "dni_colaborador")
 	private String dniColaborador;
-	@Lob
 	@Column(name = "imagen_colaborador")
+	@Lob
 	private byte[] imagenColaborador;
 	@Column(name="fechareg_colaborador")
 	private Date fecharegColaborador;

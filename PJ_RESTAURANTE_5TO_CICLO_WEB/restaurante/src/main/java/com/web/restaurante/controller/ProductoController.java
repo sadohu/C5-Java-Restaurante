@@ -57,7 +57,7 @@ public class ProductoController {
 		 
 	
 		model.addAttribute("producto",producto);
-		model.addAttribute("categoriaId",producto.getTipo().getId_categoria_producto());
+		model.addAttribute("categoriaId",producto.getCategoriaProducto().getIdCategoriaProducto());
 		//y redireccionamos a la vista o html actualizaProducto
 		return "actualizaProducto";
 	}
