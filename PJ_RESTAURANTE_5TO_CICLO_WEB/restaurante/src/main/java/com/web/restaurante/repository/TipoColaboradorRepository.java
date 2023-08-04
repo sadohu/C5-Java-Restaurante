@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TipoColaboradorRepository extends JpaRepository<TipoColaborador, Integer> {
 	
-	TipoColaborador findById(int id);
+	TipoColaborador findByIdTipoColaborador(int idTipoColaborador);
 }

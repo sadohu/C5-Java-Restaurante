@@ -1,5 +1,6 @@
 package com.web.restaurante.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,8 @@ import lombok.Data;
 public class MedioPago {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_medio_pago;
-	private String des_medio_pago;
+	@Column(name = "id_medio_pago")
+	private int idMedioPago;
+	@Column(name = "des_medio_pago")
+	private String desMedioPago;
 }

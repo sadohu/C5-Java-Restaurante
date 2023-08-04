@@ -21,7 +21,7 @@ public class Distrito {
 	private String des_distrito;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "distrito_usuario")
+	@OneToMany(mappedBy = "distritoUsuario")
 	private List<Usuario> listaUsuario;
 	
 	@JsonIgnore

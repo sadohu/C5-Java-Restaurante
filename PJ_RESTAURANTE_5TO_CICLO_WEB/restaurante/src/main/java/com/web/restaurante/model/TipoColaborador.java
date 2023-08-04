@@ -26,11 +26,12 @@ public class TipoColaborador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_tipo_colaborador")
-	private int id;
-	private String des_tipo_colaborador;
+	private int idTipoColaborador;
+	@Column(name="des_tipo_colaborador")
+	private String desTipoColaborador;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "tipo_colaborador")
+	@OneToMany(mappedBy = "tipoColaborador")
 	private List<Colaborador> listaColaborador;
 	
 }

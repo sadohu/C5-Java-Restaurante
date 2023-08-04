@@ -2,6 +2,7 @@ package com.web.restaurante.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,12 +20,20 @@ import lombok.NoArgsConstructor;
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_pedido;
-	private int id_usuario;
-	private int id_direntrega;
-	private int id_colaborador;
-	private double tiempoentrega_pedido;
+	@Column(name = "id_pedido")
+	private int idPedido;
+	@Column(name="id_usuario")
+	private Usuario idUsuario;
+	@Column(name="id_direntrega")
+	private Direntrega_Usuario idDirentregaPedido;
+	@Column(name = "id_colaborador")
+	private Colaborador idColaborador;
+	@Column(name = "tiempoentrega_pedido")
+	private double tiempoEntregaPedido;
+	@Column(name = "fechareg_pedido")
 	private Date fechareg_pedido;
+	@Column(name="fechaact_pedido")
 	private Date fechaact_pedido;
+	@Column(name = "estado_pedido")
 	private String estado_pedido;
 }

@@ -42,27 +42,41 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_usuario;
+	@Column(name="id_usuario")
+	private int idUsuario;
 	@ManyToOne
 	@JoinColumn(name="id_tipo_usuario")
-	private TipoUsuario tipo_usuario;
-	private String cod_usuario;
-	private String nom_usuario;
-	private String ape_usuario;
-	private String tel_usuario;
-	private String cel_usuario;
+	private TipoUsuario tipoUsuario;
+	@Column(name="cod_usuario")
+	private String codUsuario;
+	@Column(name="nom_usuario")
+	private String nomUsuario;
+	@Column(name="ape_usuario")
+	private String apeUsuario;
+	@Column(name="tel_usuario")
+	private String telUsuario;
+	@Column(name="cel_usuario")
+	private String celUsuario;
 	@ManyToOne
 	@JoinColumn(name="id_distrito")
-	private Distrito distrito_usuario;
-	private String dir_usuario;
-	private String dni_usuario;
-	private String email_usuario;
-	private String password_usuario;
+	private Distrito distritoUsuario;
+	@Column(name="dir_usuario")
+	private String dirUsuario;
+	@Column(name="dni_usuario")
+	private String dniUsuario;
+	@Column(name="email_usuario")
+	private String emailUsuario;
+	@Column(name="password_usuario")
+	private String passwordUsuario;
 	@Lob
-	private byte[] imagen_usuario ;
-	private Date fechareg_usuario;
-	private Date fechaact_usuario;
-	private String estado_usuario;
+	@Column(name="imagen_usuario")
+	private byte[] imagenUsuario ;
+	@Column(name="fechareg_usuario")
+	private Date fecharegUsuario;
+	@Column(name="fechaact_usuario")
+	private Date fechaactUsuario;
+	@Column(name="estado_usuario")
+	private String estadoUsuario;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "idUsuario")

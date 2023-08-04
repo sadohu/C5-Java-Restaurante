@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="tb_colaborador")
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,16 +26,24 @@ public class Colaborador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_colaborador")
-	private int id;
+	private int idColaborador;
+
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_colaborador")
-	private TipoColaborador tipo_colaborador;
-	private String nom_colaborador;
-	private String ape_colaborador;
-	private String dni_colaborador;
+	private TipoColaborador tipoColaborador;
+	@Column(name = "nom_colaborador")
+	private String nomColaborador;
+	@Column(name = "ape_colaborador")
+	private String apeColaborador;
+	@Column(name = "dni_colaborador")
+	private String dniColaborador;
 	@Lob
-	private byte[] imagen_colaborador;
-	private Date fechareg_colaborador;
-	private Date fechaact_colaborador;
-	private String estado_colaborador;
+	@Column(name = "imagen_colaborador")
+	private byte[] imagenColaborador;
+	@Column(name="fechareg_colaborador")
+	private Date fecharegColaborador;
+	@Column(name = "fechaact_colaborador")
+	private Date fechaactColaborador;
+	@Column(name = "estado_colaborador")
+	private String estadoColaborador;
 }

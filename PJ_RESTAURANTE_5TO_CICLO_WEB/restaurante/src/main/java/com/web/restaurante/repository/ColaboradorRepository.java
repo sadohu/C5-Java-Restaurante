@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ColaboradorRepository extends JpaRepository<Colaborador,Integer>{
 	
-	Colaborador findById(int id);
+	Colaborador findByIdColaborador(int idColaborador);
 	
 }

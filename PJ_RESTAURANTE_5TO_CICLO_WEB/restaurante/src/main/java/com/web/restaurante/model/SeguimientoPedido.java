@@ -2,6 +2,7 @@ package com.web.restaurante.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +17,13 @@ public class SeguimientoPedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_pedido;
-	private int id_seguimiento_pedido;
-	private Date fechareg_seguimiento_pedido;
-	private Date esatdo_seguimiento_pedido;
+	@Column(name = "id_pedido")
+	private int idPedido;
+	@Column(name="id_seguimiento_pedido")
+	private int idSeguimientoPedido;
+	@Column(name="fechareg_seguimiento_pedido")
+	private Date fecharegSeguimientoPedido;
+	@Column(name="estado_seguimiento_pedido")
+	private Date estadoSeguimientoPedido;
 	
 }

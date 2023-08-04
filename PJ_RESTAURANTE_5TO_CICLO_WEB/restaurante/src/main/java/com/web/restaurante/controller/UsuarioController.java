@@ -36,7 +36,6 @@ import jakarta.websocket.Session;
 
 @Controller
 
-@SessionAttributes("session")
 public class UsuarioController {
 	
 	@Autowired
@@ -61,14 +60,14 @@ public class UsuarioController {
 	private String iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model) {
 		
 		List<Usuario> listaUsuario= service.listarUsuario(); 
-		String codigo_usuario = usuario.getCod_usuario();
-		String password_usuario = usuario.getPassword_usuario();
+		String codigo_usuario = usuario.getCodUsuario();
+		String password_usuario = usuario.getPasswordUsuario();
 		
 		for (Usuario obj :listaUsuario) {
-			if(obj.getCod_usuario().equals(codigo_usuario) && obj.getPassword_usuario().equals(password_usuario)) {
+			if(obj.getCodUsuario().equals(codigo_usuario) && obj.getPasswordUsuario().equals(password_usuario)) {
 				
-				model.addAttribute("accesoCorrecto",obj.getNom_usuario());
-				model.addAttribute("imagen_usuario",new EncodeBase64().base64ToString(obj.getImagen_usuario()));
+				model.addAttribute("accesoCorrecto",obj.getNomUsuario());
+				model.addAttribute("imagen_usuario",new EncodeBase64().base64ToString(obj.getImagenUsuario()));
 				
 				//session.setAttribute("usuario", obj);
 				
@@ -96,8 +95,8 @@ public class UsuarioController {
 	private String registrarUsuario(Model model) {
 		
 		Usuario usuario = new Usuario();
-		usuario.setEstado_usuario("ACTIVO");
-		usuario.setFechareg_usuario(new java.sql.Date(new java.util.Date().getTime()));
+		usuario.setEstadoUsuario("ACTIVO");
+		usuario.setFecharegUsuario(new java.sql.Date(new java.util.Date().getTime()));
 		
 		model.addAttribute("usuario",usuario);
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
@@ -124,7 +123,7 @@ public class UsuarioController {
 		try {
 
 			imagenByte = imagen.getBytes();
-			usuario.setImagen_usuario(imagenByte);
+			usuario.setImagenUsuario(imagenByte);
 			
 
 		}catch(Exception ex) {

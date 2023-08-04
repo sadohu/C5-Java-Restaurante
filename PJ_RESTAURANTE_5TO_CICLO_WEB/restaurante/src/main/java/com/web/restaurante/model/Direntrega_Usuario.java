@@ -35,6 +35,8 @@ public class Direntrega_Usuario {
 	@JoinColumn(name="id_distrito")
 	private Distrito distrito;
 	private String des_direntrega;
+	@Column(name="fechareg_direntrega")
 	private Date fechareg_direntrega;
+	@Column(name="estado_direntegra")
 	private String estado_direntrega;
 }
