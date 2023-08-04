@@ -1,5 +1,6 @@
 package com.web.restaurante.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import org.springframework.context.annotation.Primary;
@@ -22,7 +23,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Colaborador {
+public class Colaborador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_colaborador")

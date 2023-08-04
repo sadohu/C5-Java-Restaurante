@@ -1,5 +1,6 @@
 package com.web.restaurante.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
@@ -22,7 +23,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(Direntrega_Usuario_PK.class)
-public class Direntrega_Usuario {
+public class Direntrega_Usuario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
