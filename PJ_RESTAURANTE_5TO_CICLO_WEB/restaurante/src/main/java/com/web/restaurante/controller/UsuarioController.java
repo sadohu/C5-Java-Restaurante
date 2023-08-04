@@ -1,5 +1,6 @@
 package com.web.restaurante.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/listaUsuario")
-	private String listaUsuario (Model model,@RequestParam(name="imagenBase64", required=false) String imagenBase64) {
+	private String listaUsuario (Model model) {
 		
 		List<Usuario> listaUsuario = service.listarUsuario();
 		
@@ -101,21 +102,12 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("grabarUsuario")
-	private String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario) {
+	private String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario) throws IOException {
 		
-		byte[] imagenByte= null;
-		
-		try {
-
-			imagenByte = imagen.getBytes();
-			usuario.setImagenUsuario(imagenByte);
+		usuario.setImagenUsuario(imagen.getBytes());
 			
-
-		}catch(Exception ex) {
-			
-		}
-		
 		service.registrarUsuario(usuario);
+		
 		return "redirect:/listaUsuario";
 	}
 	

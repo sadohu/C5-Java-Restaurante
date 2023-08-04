@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import com.web.restaurante.model.Colaborador;
 import com.web.restaurante.model.TipoColaborador;
 import com.web.restaurante.reuzable.EncodeBase64;
 
+import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -58,12 +60,26 @@ public class ColaboradorController {
 		return "registraColaborador";
 	}
 	
+	@GetMapping("/actualizarColaborador/{id}")
+	public String actualizarColaborador(@PathVariable("id")int id, Model model) {
+		
+		Colaborador colaborador = colaboradorService.buscar(id);
+		int idTipoColaborador = colaborador.getTipoColaborador().getIdTipoColaborador();
+		List<TipoColaborador> listaTipoColaborador = tipoColaboradorService.listar();
+		
+		model.addAttribute("colaborador",colaborador);
+		model.addAttribute("listaTipoColaborador",listaTipoColaborador);
+		model.addAttribute("idTipoColaborador", idTipoColaborador);
+		
+		return "registraColaborador";
+	}
+	
 	@PostMapping("grabarColaborador")
 	public String grabarColaborador(@ModelAttribute("colaborador") Colaborador obj, MultipartFile imagen) throws IOException {
 		
 		obj.setImagenColaborador(imagen.getBytes());
 		colaboradorService.agregar(obj);
 		
-		return "redirect:/";
+		return "redirect:/listaColaborador";
 	}
 }
