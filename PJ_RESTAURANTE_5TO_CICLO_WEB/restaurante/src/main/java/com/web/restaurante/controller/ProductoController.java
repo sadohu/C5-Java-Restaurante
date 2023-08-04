@@ -20,7 +20,7 @@ public class ProductoController {
 	@Autowired
 	private CategoriaProService serviceCat;
 	
-	@GetMapping("/1")
+	@GetMapping("/1istaProducto")
 	public String listadoEmpleados(Model model) {
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("Base64",new  EncodeBase64());

@@ -6,14 +6,16 @@ import org.springframework.stereotype.Service;
 
 import com.web.restaurante.business.Direntrega_UsuarioService;
 import com.web.restaurante.model.Direntrega_Usuario;
+import com.web.restaurante.repository.Direntrega_UsuarioRepository;
 
 @Service
 public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService {
 
+	private Direntrega_UsuarioRepository direntrega_usuarioRepository;
+	
 	@Override
 	public List<Direntrega_Usuario> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return direntrega_usuarioRepository.findAll();
 	}
 
 	@Override
@@ -24,14 +26,12 @@ public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService
 
 	@Override
 	public void agregar(Direntrega_Usuario obj) {
-		// TODO Auto-generated method stub
-		
+		direntrega_usuarioRepository.save(obj);
 	}
 
 	@Override
 	public void editar(Direntrega_Usuario obj) {
-		// TODO Auto-generated method stub
-		
+		direntrega_usuarioRepository.save(obj);
 	}
 
 	@Override

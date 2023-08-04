@@ -1,12 +1,5 @@
 package com.web.restaurante.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.restaurante.business.DistritoService;
@@ -28,10 +17,6 @@ import com.web.restaurante.business.TipoUsuarioService;
 import com.web.restaurante.business.UsuarioService;
 import com.web.restaurante.model.Usuario;
 import com.web.restaurante.reuzable.EncodeBase64;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 
 
 @Controller

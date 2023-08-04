@@ -13,13 +13,13 @@
 
 	<div class="container pt-3 bg-light vh-100 ">
 		<div>
-			<h2>LISTA DE USUARIO</h2>
+			<h2>LISTA DE COLABORADORES</h2>
 		</div>
 
 		<div class="my-4">
 			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
-				href="agregarUsuario">NUEVO USUARIO</a>
-			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO USUARIO</a>
+				href="agregarUsuario">NUEVO COLABORADOR</a>
+			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO COLABORADOR</a>
 		</div>
 
 		<div class="card table-responsive">
@@ -30,28 +30,26 @@
 						<th>TIPO</th>
 						<th>NOMBRE</th>
 						<th>APELLIDO</th>
-						<th>DISTRITO</th>
-						<th>EMAIL</th>
+						<th>DNI</th>
 						<th>IMAGEN</th>
 						<th>ESTADO</th>
 						<th>ACCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="usuario : ${listaUsuario}">
-						<td th:text="${usuario.idUsuario}"></td>
-						<td th:text="${usuario.tipoUsuario.desTipoUsuario}"></td>
-						<td th:text="${usuario.nomUsuario}"></td>
-						<td th:text="${usuario.apeUsuario}"></td>
-						<td th:text="${usuario.distritoUsuario.desDistrito}"></td>
-						<td th:text="${usuario.emailUsuario}"></td>
+					<tr th:each="colaborador : ${listaColaborador}">
+						<td th:text="${colaborador.idColaborador}"></td>
+						<td th:text="${colaborador.tipoColaborador.desTipoColaborador}"></td>
+						<td th:text="${colaborador.nomUsuario}"></td>
+						<td th:text="${colaborador.apeUsuario}"></td>
+						<td th:text="${colaborador.dniColaborador}"></td>
 						<td>
-							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagenUsuario)}}"
+							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(colaborador.imagenColaborador)}}"
 								width="100px" height="100px" />
 						</td>
-						<td th:text="${usuario.estadoUsuario}"></td>
+						<td th:text="${colaborador.estadoColaborador}"></td>
 						<td>
-							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.idUsuario})}"
+							<a th:href="@{/actualizarColaborador/{id}(id=${colaborador.idColaborador})}"
 								class="btn btn-primary">EDITAR</a>
 						</td>
 					</tr>

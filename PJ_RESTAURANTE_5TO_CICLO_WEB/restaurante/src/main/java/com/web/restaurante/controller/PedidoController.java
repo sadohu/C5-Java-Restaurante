@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.restaurante.business.ColaboradorService;
 import com.web.restaurante.business.PedidoService;
@@ -17,6 +18,7 @@ import com.web.restaurante.model.Pedido;
 import com.web.restaurante.reuzable.EncodeBase64;
 
 @Controller
+@RequestMapping
 public class PedidoController {
 	
 	@Autowired
@@ -28,7 +30,7 @@ public class PedidoController {
 	//@Autowired
 	// private falta direntrega 	
 	
-	@GetMapping("/")
+	@GetMapping("/listaPedido")
 	public String listadoPedido(Model model) {
 		List<Pedido> listaPedido = pedidoservice.listarPedido();
 		model.addAttribute("listaPedido",listaPedido);

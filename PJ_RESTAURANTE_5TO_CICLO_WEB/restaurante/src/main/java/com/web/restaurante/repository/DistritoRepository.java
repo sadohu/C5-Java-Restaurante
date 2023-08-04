@@ -7,5 +7,5 @@ import com.web.restaurante.model.Distrito;
 
 @Repository
 public interface DistritoRepository extends JpaRepository<Distrito, Integer> {
-
+	Distrito findByIdDistrito(int idDistrito);
 }
