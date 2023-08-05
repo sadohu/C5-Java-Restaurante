@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="../static/include/head">
 	<title>USUARIO</title>
@@ -14,38 +14,49 @@
 		</div>
 
 		<div>
-			<form th:action="@{/grabarUsuario}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
+		
+		<div th:if="${param.success}">
+    <div class="alert alert-info">Se registró correctamente...</div>
+   </div>
+   <div class="card-header">
+    <h3 class="text-center">Formulario Registro Usuario</h3>
+   </div>
+   <div class="card-body">
+		
+			<form role="form"  method="post" th:action="@{/registraUsuario/guardar}" th:object="${usuario}"  enctype="multipart/form-data">
 
 				<div class="d-flex flex-column gap-2">
 					<div class="row row-cols-3 ">
 						<div>
 							<label>ID</label>
-							<input class="form-control" th:field="*{idUsuario}" type="text" />
+							<input class="form-control" th:field="*{idUsuario}" type="text" placeholder="ID" />
 						</div>
 						<div>
 							<label>FECHA REG</label>
-							<input class="form-control" th:field="*{fecharegUsuario}" type="date" />
+							<input class="form-control" th:field="*{fecharegUsuario}" type="date" placeholder="FECHA" />
 						</div>
 						<div>
 							<label>ESTADO</label>
-							<input class="form-control" th:field="*{estadoUsuario}" type="text" />
+							<input class="form-control" th:field="*{estadoUsuario}" type="text" placeholder="ESTADO" />
 						</div>
 					</div>
 
 					<div class="row row-cols-2 g-2">
 
 						<div>
-							<label>NOMBRE</label>
-							<input class="form-control" th:field="*{nomUsuario}" type="text" />
+							<label for="nomUsuario">NOMBRE</label>
+							<input class="form-control" th:field="*{nomUsuario}" type="text" placeholder="NOMBRE" name="nomUsuario" />
+							<p th:errors="*{nomUsuario}" class="text-danger" th:if="${#fields.hasErrors('nomUsuario')}"></p>
 						</div>
 						<div>
-							<label>APELLIDO</label>
-							<input class="form-control" th:field="*{apeUsuario}" type="text" />
+							<label for="apeUsu">APELLIDO</label>
+							<input th:field="*{apeUsu}" type="text" placeholder="APELLIDO" name="apeUsu"  class="form-control" />
+							<p th:errors="*{apeUsu}" class="text-danger" th:if="${#fields.hasErrors('apeUsu')}"></p>
 						</div>
 						
 						<div>
-							<label>NOMBRE DE USUARIO</label>
-							<input class="form-control" th:field="*{codUsuario}" type="text" />
+							<label for="codUsuario">NOMBRE DE USUARIO</label>
+							<input class="form-control" th:field="*{codUsuario}" type="text" placeholder="Nombre de Usuario" name="codUsuario" />
 						</div>
 						
 						<div>
@@ -55,12 +66,12 @@
 							</select>
 						</div>
 						<div>
-							<label>TELEFONO</label>
-							<input class="form-control" th:field="*{telUsuario}" type="tel" />
+							<label for="telUsuario">TELEFONO</label>
+							<input class="form-control" th:field="*{telUsuario}" type="tel" placeholder="Telefono" name="telUsuario" />
 						</div>
 						<div>
-							<label>CELULAR</label>
-							<input class="form-control" th:field="*{celUsuario}" type="tel" />
+							<label for="celUsuario">CELULAR</label>
+							<input class="form-control" th:field="*{celUsuario}" type="tel" placeholder="Celular" name="celUsuario" />
 						</div>
 						<div>
 							<label>DISTRITO</label>
@@ -69,20 +80,20 @@
 							</select>
 						</div>
 						<div>
-							<label>DIRECCION</label>
-							<input class="form-control" th:field="*{dirUsuario}" type="text" />
+							<label for="dirUsuario">DIRECCION</label>
+							<input class="form-control" th:field="*{dirUsuario}" type="text" placeholder="Direccion"  name="dirUsuario" />
 						</div>
 						<div>
-							<label>DNI</label>
-							<input class="form-control" th:field="*{dniUsuario}" type="text" />
+							<label for="dniUsuario">DNI</label>
+							<input class="form-control" th:field="*{dniUsuario}" type="text" placeholder="DNI"  name="dniUsuario"/>
 						</div>
 						<div>
-							<label>EMAIL</label>
-							<input class="form-control" th:field="*{emailUsuario}" type="email" />
+							<label for="emailUsuario">EMAIL</label>
+							<input class="form-control" th:field="*{emailUsuario}" type="email" placeholder="EMAIL" name="emailUsuario" />
 						</div>
 						<div>
-							<label>PASSWORD</label>
-							<input class="form-control" th:field="*{passwordUsuario}" type="text" />
+							<label for="passwordUsuario">PASSWORD</label>
+							<input class="form-control" th:field="*{passwordUsuario}" type="text" placeholder="Password" name="passwordUsuario" />
 						</div>
 						<div>
 							<label>IMAGEN</label>
@@ -91,6 +102,8 @@
 					</div>
 					<div>
 						<button class="btn btn-success" type="submit">GRABAR</button>
+						 <span>Estás registrado?
+     				 <a th:href="@{/login}">Ingresar aquí</a>
 					</div>
 				</div>
 

@@ -21,6 +21,10 @@
 				href="agregarUsuario">NUEVO USUARIO</a>
 			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO USUARIO</a>
 		</div>
+		
+		<div class="my-4">
+			<a class="btn btn-primary" th:href="@{/logout}">CERRAR SESION</a>
+		</div>
 
 		<div class="card table-responsive">
 			<table class="table table-bordered">
@@ -42,13 +46,13 @@
 						<td th:text="${usuario.idUsuario}"></td>
 						<td th:text="${usuario.tipoUsuario.desTipoUsuario}"></td>
 						<td th:text="${usuario.nomUsuario}"></td>
-						<td th:text="${usuario.apeUsuario}"></td>
+						<td th:text="${usuario.apeUsu}"></td>
 						<td th:text="${usuario.distritoUsuario.desDistrito}"></td>
 						<td th:text="${usuario.emailUsuario}"></td>
-						<td>
+						<!--<td>
 							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagenUsuario)}}"
 								width="100px" height="100px" />
-						</td>
+						</td>-->
 						<td th:text="${usuario.estadoUsuario}"></td>
 						<td>
 							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.idUsuario})}"
@@ -132,10 +136,10 @@
 										<label>PASSWORD</label>
 										<input class="form-control" type="text" />
 									</div>
-									<div>
+									<!--<div>
 										<label>IMAGEN</label>
 										<input class="form-control" type="file" />
-									</div>
+									</div>-->
 									<div>
 										<label>ESTADO</label>
 										<input class="form-control" type="text" />

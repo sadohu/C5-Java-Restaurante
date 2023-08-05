@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
-	TipoUsuario findByIdTipoUsuario(int idTipoUsuario);
+	TipoUsuario findByDesTipoUsuario(String destipousuario);
 }

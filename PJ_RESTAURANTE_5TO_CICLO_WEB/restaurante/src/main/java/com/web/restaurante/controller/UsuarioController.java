@@ -1,8 +1,8 @@
 package com.web.restaurante.controller;
-
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.Objects;
 import com.web.restaurante.business.DistritoService;
 import com.web.restaurante.business.TipoUsuarioService;
 import com.web.restaurante.business.UsuarioService;
 import com.web.restaurante.model.Usuario;
 import com.web.restaurante.reuzable.EncodeBase64;
 
+import lombok.AllArgsConstructor;
+
 
 @Controller
-
+@AllArgsConstructor
 public class UsuarioController {
 	
 	@Autowired
@@ -32,41 +34,42 @@ public class UsuarioController {
 	private TipoUsuarioService tipoUsuarioService;
 
 	
-	@GetMapping("/loginRestaurante")
-	private String login (Model model) {
+	@GetMapping("/login")
+	public String login (Model model) {
 		
 		model.addAttribute("usuario",new Usuario());
 		//session.invalidate();
 		//session.removeAttribute("usuario");
 		
-		return "loginRestaurante";
+		return "login";
 	}
 	
-	@PostMapping("/iniciarSesion")
-	private String iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model) {
-		
-		List<Usuario> listaUsuario= service.listarUsuario(); 
-		String codigo_usuario = usuario.getCodUsuario();
-		String password_usuario = usuario.getPasswordUsuario();
-		
-		for (Usuario obj :listaUsuario) {
-			if(obj.getCodUsuario().equals(codigo_usuario) && obj.getPasswordUsuario().equals(password_usuario)) {
-				
-				model.addAttribute("accesoCorrecto",obj.getNomUsuario());
-				model.addAttribute("imagen_usuario",new EncodeBase64().base64ToString(obj.getImagenUsuario()));
-				
-				//session.setAttribute("usuario", obj);
-				
-				return "/index";
-			}
-		}
-		
-		model.addAttribute("error","Las credenciales no son correctas");
-		return "loginRestaurante";
-	}
+	/*
+	 * @PostMapping("/iniciarSesion") private String
+	 * iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model) {
+	 * 
+	 * List<Usuario> listaUsuario= service.listarUsuario(); String codigo_usuario =
+	 * usuario.getCodUsuario(); String password_usuario =
+	 * usuario.getPasswordUsuario();
+	 * 
+	 * for (Usuario obj :listaUsuario) {
+	 * if(obj.getCodUsuario().equals(codigo_usuario) &&
+	 * obj.getPasswordUsuario().equals(password_usuario)) {
+	 * 
+	 * model.addAttribute("accesoCorrecto",obj.getNomUsuario());
+	 * model.addAttribute("imagen_usuario",new
+	 * EncodeBase64().base64ToString(obj.getImagenUsuario()));
+	 * 
+	 * //session.setAttribute("usuario", obj);
+	 * 
+	 * return "/index"; } }
+	 * 
+	 * model.addAttribute("error","Las credenciales no son correctas"); return
+	 * "loginRestaurante"; }
+	 */
 	
 	@GetMapping("/listaUsuario")
-	private String listaUsuario (Model model) {
+	public String listaUsuario (Model model) {
 		
 		List<Usuario> listaUsuario = service.listarUsuario();
 		
@@ -74,11 +77,11 @@ public class UsuarioController {
 		
 		model.addAttribute("Base64",new EncodeBase64());
 		
-		return "/listaUsuario";
+		return "listaUsuario";
 	}
 	
 	@GetMapping("/registraUsuario")
-	private String registrarUsuario(Model model) {
+	public String registrarUsuario(Model model) {
 		
 		Usuario usuario = new Usuario();
 		usuario.setEstadoUsuario("ACTIVO");
@@ -88,11 +91,11 @@ public class UsuarioController {
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
 		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
 		
-		return "/registraUsuario";
+		return "registraUsuario";
 	}
 	
 	@GetMapping("/actualizaUsuario/{id}")
-	private String actualizaUsuario(@PathVariable(value="id") int id, Model model) {
+	public String actualizaUsuario(@PathVariable(value="id") int id, Model model) {
 		Usuario usuario = service.buscarUsuario(id);
 		
 		model.addAttribute("usuario",usuario);
@@ -101,14 +104,26 @@ public class UsuarioController {
 		return "/registraUsuario";
 	}
 	
-	@PostMapping("grabarUsuario")
-	private String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario) throws IOException {
+	@PostMapping("/registraUsuario/guardar")
+	public String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario,BindingResult result,Model model) throws IOException {
+		
 		
 		usuario.setImagenUsuario(imagen.getBytes());
 			
-		service.registrarUsuario(usuario);
 		
-		return "redirect:/listaUsuario";
+		Usuario usuarioExiste=service.buscarPorEmail(usuario.getEmailUsuario());
+		if(Objects.nonNull(usuarioExiste)) {
+			result.reject("emailUsuario",null,"Ya existe un usuario con el email proporcionado");
+		} //Fin del If
+		//si hay errores en tema de validacion
+		if(result.hasErrors()) {
+			//mandamos por atriibuto usuario el usuarioDto
+			model.addAttribute("usuario",usuario);
+			//y lo enviamos a la vista registro .html
+			return "registraUsuario";
+		} // fin de if hasErrros
+		service.registrarUsuario(usuario);
+		return "redirect:/registraUsuario?success";
 	}
 	
 

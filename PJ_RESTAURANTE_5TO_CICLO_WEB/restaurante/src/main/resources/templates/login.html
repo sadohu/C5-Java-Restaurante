@@ -33,19 +33,32 @@
 
 					<div clasS="card-body ">
 
-						<span class="text-danger" th:if="${error}" th:text="${error}"></span>
-
+						<!--<span class="text-danger" th:if="${error}" th:text="${error}"></span>-->
+					<!--Para mensaje de validaciones si hay error-->
+				<div th:if="${param.error}">
+					<!--Mostrara mensaje de error si viene param.error-->
+					<div class="alert alert-danger">Email o Clave Incorrecto...</div>
+				</div>
+				<!--Para mensaje cerrar sesion-->
+				<div th:if="${param.logout}">
+					<!--Mostrara mensaje de error si viene param.error-->
+					<div class="alert alert-success">Cerraste sesión...</div>
+				</div>
 						<div class="">
-							<form th:action="@{/iniciarSesion}" th:object="${usuario}" method="POST">
+							<form th:action="@{/login}" th:object="${usuario}" method="post" roles="form">
 								<div class="row g-4 m-0 p-0">
 									<div class="row g-4 m-0 p-0">
 										<div>
-											<label>USUARIO</label>
-											<input class="form-control" th:field="*{codUsuario}" type="text">
+											<label for="username">USUARIO</label>
+											<!--<input class="form-control" th:field="*{codUsuario}" type="text">-->
+											<input type="text" name="username" id="username" placeholder="Email"
+									class="form-control" />
 										</div>
 										<div>
-											<label>USUARIO</label>
-											<input class="form-control" th:field="*{passwordUsuario}" type="password">
+											<label for="password">PASSWORD</label>
+											<!--<input class="form-control" th:field="*{passwordUsuario}" type="password">-->
+												<input type="password" name="password" id="password" placeholder="Clave"
+								class="form-control" />
 										</div>
 									</div>
 									<div class="d-flex-lg gap-2">
