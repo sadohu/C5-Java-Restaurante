@@ -36,7 +36,7 @@
 						<th>APELLIDO</th>
 						<th>DISTRITO</th>
 						<th>EMAIL</th>
-						<!--<th>IMAGEN</th>-->
+						<th>IMAGEN</th>
 						<th>ESTADO</th>
 						<th>ACCIONES</th>
 					</tr>
@@ -49,10 +49,10 @@
 						<td th:text="${usuario.apeUsu}"></td>
 						<td th:text="${usuario.distritoUsuario.desDistrito}"></td>
 						<td th:text="${usuario.emailUsuario}"></td>
-						<!--<td>
+						<td>
 							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagenUsuario)}}"
 								width="100px" height="100px" />
-						</td>-->
+						</td>
 						<td th:text="${usuario.estadoUsuario}"></td>
 						<td>
 							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.idUsuario})}"
