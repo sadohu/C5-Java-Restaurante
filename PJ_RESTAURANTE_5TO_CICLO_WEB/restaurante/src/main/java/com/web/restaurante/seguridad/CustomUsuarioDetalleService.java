@@ -1,4 +1,5 @@
 package com.web.restaurante.seguridad;
+
 import lombok.AllArgsConstructor;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,26 +20,23 @@ import com.web.restaurante.repository.UsuarioRepository;
 public class CustomUsuarioDetalleService implements UserDetailsService {
 
 	private UsuarioRepository repository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		
-		
-				Usuario usuario=repository.findByEmailUsuario(email);
-			
-				if(!Objects.isNull(usuario)) {
-					
-				  return new User(usuario.getEmailUsuario(),usuario.getPasswordUsuario(),rolesAuthority(usuario.getTipoUsuario()));	
-				}
-				//si no se encuentra
-				else {
-					throw new UsernameNotFoundException("Usuario o Password No válido");
-				}
-		
-		
-		
-	} //fin de loadUserByUsername
-	
+
+		Usuario usuario = repository.findByEmailUsuario(email);
+
+		if (!Objects.isNull(usuario)) {
+
+			return new User(usuario.getEmailUsuario(), usuario.getPasswordUsuario(),
+					rolesAuthority(usuario.getTipoUsuario()));
+		}
+		// si no se encuentra
+		else {
+			throw new UsernameNotFoundException("Usuario o Password No válido");
+		}
+
+	} // fin de loadUserByUsername
 
 	/*
 	 * private Collection<? extends GrantedAuthority>
@@ -51,8 +49,8 @@ public class CustomUsuarioDetalleService implements UserDetailsService {
 	 * .collect(Collectors.toList());
 	 * 
 	 * return rolesAuthority; } //fin de rolesAuthority
-	 */	
-	private Collection<? extends GrantedAuthority> rolesAuthority(TipoUsuario rol){
-	    return Collections.singletonList(new SimpleGrantedAuthority(rol.getDesTipoUsuario()));
+	 */
+	private Collection<? extends GrantedAuthority> rolesAuthority(TipoUsuario rol) {
+		return Collections.singletonList(new SimpleGrantedAuthority(rol.getDesTipoUsuario()));
 	}
 }
