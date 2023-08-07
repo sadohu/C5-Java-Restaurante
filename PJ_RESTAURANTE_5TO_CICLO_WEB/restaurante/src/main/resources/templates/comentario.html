@@ -44,9 +44,11 @@
 			<div class="mt-4">
 				<form th:action="@{/grabarComentario}" th:object="${comentario}" method="post">
 					<div class="row g-4">
-						<div class="col-12">
+						<div class="col-12 d-flex gap-2">
+							<img th:if="${session.usuario}!=null" class="rounded-circle"
+								th:src="@{'data:image;base64,' + ${session.imagen}}" width="60px"
+								heigth="60px">
 							<textarea class="form form-control" th:field="*{desComentario}" ></textarea>
-							
 						</div>
 						
 						

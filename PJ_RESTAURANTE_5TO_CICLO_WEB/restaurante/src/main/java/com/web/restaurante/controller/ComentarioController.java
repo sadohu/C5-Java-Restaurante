@@ -13,6 +13,8 @@ import com.web.restaurante.business.ComentarioService;
 import com.web.restaurante.model.Comentario;
 import com.web.restaurante.model.Usuario;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ComentarioController {
 
@@ -30,10 +32,9 @@ public class ComentarioController {
 	}
 	
 	@PostMapping("/grabarComentario")
-	public String grabarComentario (@ModelAttribute("comentario") Comentario obj) {
+	public String grabarComentario (@ModelAttribute("comentario") Comentario obj, HttpSession session) {
 		
-		Usuario user = new Usuario();
-		user.setIdUsuario(1);
+		Usuario user =(Usuario) session.getAttribute("usuario");
 		
 		obj.setFecharegComentario(new Date(new java.util.Date().getTime()));
 		obj.setEstadoComentario("ACTIVO");
