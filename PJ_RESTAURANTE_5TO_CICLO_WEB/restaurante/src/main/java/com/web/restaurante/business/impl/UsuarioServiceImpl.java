@@ -49,6 +49,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setDistritoUsuario(obj.getDistritoUsuario());
 		usuario.setDniUsuario(obj.getDniUsuario());
 		usuario.setEstadoUsuario(obj.getEstadoUsuario());
+		usuario.setFecharegUsuario(obj.getFecharegUsuario());
+		usuario.setFechaactUsuario(obj.getFechaactUsuario());
+		usuario.setEstadoUsuario(obj.getEstadoUsuario());
 		TipoUsuario rol=tipRepository.findByDesTipoUsuario("CLIENTE");
 		//Condicionamos si en caso rol sea null
 				if( Objects.isNull(rol) ) {
