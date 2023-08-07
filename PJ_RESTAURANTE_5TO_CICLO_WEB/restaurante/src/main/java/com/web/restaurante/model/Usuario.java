@@ -82,5 +82,9 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	private List<Direntrega_Usuario> listaDirentrega;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuarioCliente")
+	private List<Comentario> listaComentario;
+	
 	
 }

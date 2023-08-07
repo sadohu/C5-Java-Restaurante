@@ -38,9 +38,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="direntrega_usuario : ${listaDirentrega_usuario}">
-						<td th:text="${direntrega_usuario.usuario.idUsuario}"></td>
+						<td th:text="${direntrega_usuario.usuario.nomUsuario}"></td>
 						<td th:text="${direntrega_usuario.idDirentrega}"></td>
-						<td th:text="${direntrega_usuario.distrito.idDistrito}"></td>
+						<td th:text="${direntrega_usuario.distrito.desDistrito}"></td>
 						<td th:text="${direntrega_usuario.desDirentrega}"></td>
 						<td th:text="${direntrega_usuario.fecharegDirentrega}"></td>
 						<td th:text="${direntrega_usuario.estadoDirentrega}"></td>
