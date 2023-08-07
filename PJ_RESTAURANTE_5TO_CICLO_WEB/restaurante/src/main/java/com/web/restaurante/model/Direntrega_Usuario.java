@@ -52,6 +52,6 @@ public class Direntrega_Usuario implements Serializable{
 	private String desDirentrega;
 	@Column(name="fechareg_direntrega")
 	private Date fecharegDirentrega;
-	@Column(name="estado_direntegra")
+	@Column(name="estado_direntrega")
 	private String estadoDirentrega;
 }

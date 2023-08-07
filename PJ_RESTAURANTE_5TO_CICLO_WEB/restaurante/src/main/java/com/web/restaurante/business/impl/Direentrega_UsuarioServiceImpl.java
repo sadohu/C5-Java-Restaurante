@@ -8,7 +8,10 @@ import com.web.restaurante.business.Direntrega_UsuarioService;
 import com.web.restaurante.model.Direntrega_Usuario;
 import com.web.restaurante.repository.Direntrega_UsuarioRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class Direentrega_UsuarioServiceImpl implements Direntrega_UsuarioService {
 
 	private Direntrega_UsuarioRepository direntrega_usuarioRepository;
