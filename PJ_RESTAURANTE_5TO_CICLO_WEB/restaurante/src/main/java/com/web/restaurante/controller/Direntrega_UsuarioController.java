@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.web.restaurante.business.Direntrega_UsuarioService;
@@ -53,9 +54,13 @@ public class Direntrega_UsuarioController {
 	};
 	
 	@PostMapping("/grabarDirentrega_usuario")
-	public String grabarDirentrega_usuario (Model model){
+	public String grabarDirentrega_usuario (@ModelAttribute("direntrega") Direntrega_Usuario obj,Model model){
 		
+		String mensaje = "";
 		
+		direntrega_usuarioService.agregar(obj);
+		
+		model.addAttribute("mensaje",mensaje);
 		
 		return "redirect:/";
 	}

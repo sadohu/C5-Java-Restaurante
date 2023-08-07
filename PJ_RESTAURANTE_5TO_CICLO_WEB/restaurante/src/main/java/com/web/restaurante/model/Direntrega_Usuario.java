@@ -3,6 +3,8 @@ package com.web.restaurante.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import org.hibernate.Remove;
+
 import com.web.restaurante.reuzable.PrimaryClustered;
 
 import jakarta.persistence.Column;
@@ -30,20 +32,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@IdClass(PrimaryClustered.class)
 public class Direntrega_Usuario implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@EmbeddedId
-	private PrimaryClustered primaryClustered;
 	
-	@MapsId("id_usario")
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
-	@MapsId("id_direntrega")
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_direntrega")
 	private int idDirentrega;
