@@ -1,6 +1,8 @@
 package com.web.restaurante.seguridad;
 
 import lombok.AllArgsConstructor;
+
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -15,19 +17,29 @@ import org.springframework.stereotype.Service;
 import com.web.restaurante.model.*;
 import com.web.restaurante.repository.UsuarioRepository;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+import jakarta.servlet.http.HttpSession;
+
 @Service
 @AllArgsConstructor
 public class CustomUsuarioDetalleService implements UserDetailsService {
 
 	private UsuarioRepository repository;
-
+	private HttpSession session = null;
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		Usuario usuario = repository.findByEmailUsuario(email);
+		
 
 		if (!Objects.isNull(usuario)) {
-
+			
+			/*ESTA BLOQUE DE CODIGO ALMACENA LA SESSION*/
+			session.setAttribute("usuario", usuario);
+			session.setAttribute("imagen", Base64.getMimeEncoder().encodeToString(usuario.getImagenUsuario()));
+			/*FIN DEL BLOQUE DEL CODIGO ATTE. LUIS RUIZ*/
+			
 			return new User(usuario.getEmailUsuario(), usuario.getPasswordUsuario(),
 					rolesAuthority(usuario.getTipoUsuario()));
 		}

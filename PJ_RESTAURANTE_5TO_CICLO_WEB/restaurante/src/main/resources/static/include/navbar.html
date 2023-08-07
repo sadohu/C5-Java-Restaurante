@@ -43,13 +43,14 @@
 			<div class="dropdown  mx-3">
 
 				<div class="dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" >
-					<img th:if="${accesoCorrecto}"
-						th:src="@{'data:image;base64,' + ${imagen_usuario}}" width="60px"
+					<img th:if="${session.usuario}!=null"
+						th:src="@{'data:image;base64,' + ${session.imagen}}" width="60px"
 						heigth="60px">
-					<img th:if="!${accesoCorrecto}" src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" width="60px"
+					<img th:if="${session.usuario}==null" src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" width="60px"
 						heigth="60px">
 					<div class="ms-3">
-						<h5 th:if"${accesoCorrecto}" class="m-0" th:text="${accesoCorrecto}">USUARIO</h5>
+						<h5 th:if="${session.usuario}==null" class="m-0">USUARIO</h5>
+						<h5 th:if="${session.usuario}!=null" class="m-0" th:text="${session.usuario.nomUsuario}"></h5>
 					</div>
 
 				</div>
@@ -60,7 +61,7 @@
 						DATOS
 					</li>
 					<li class="">
-						<a class="dropdown-item" href="/loginRestaurante">CERRAR SESION</a>
+						<a class="dropdown-item" href="/logout">CERRAR SESION</a>
 					</li>
 
 				</ul>

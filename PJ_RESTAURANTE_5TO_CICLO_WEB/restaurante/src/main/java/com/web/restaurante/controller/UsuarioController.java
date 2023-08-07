@@ -1,4 +1,5 @@
 package com.web.restaurante.controller;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -28,10 +29,12 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService service;
-	@Autowired(required = false)
+	@Autowired
 	private DistritoService distritoService;
 	@Autowired
 	private TipoUsuarioService tipoUsuarioService;
+	
+	private HttpSession session=null;
 
 	
 	@GetMapping("/login")
@@ -42,6 +45,14 @@ public class UsuarioController {
 		//session.removeAttribute("usuario");
 		
 		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String cerrarSession () {
+		
+		session.removeAttribute("usuario");
+		
+		return "/logout";
 	}
 	
 	/*
