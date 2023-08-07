@@ -23,6 +23,10 @@
 						<div class="d-flex justify-content-between">
 							<p class ="fw-bold">
 								Usuario: <span th:text="${comentario.usuarioCliente.nomUsuario}"></span>
+								<img src="https://images.emojiterra.com/google/android-12l/512px/2b50.png" width="30px" height="30px">
+								<span th:text="${comentario.cantEstrellaComentario}" />
+								Estrellas calificadas
+
 							</p>
 							<p th:text="${comentario.fecharegComentario}"></p>
 							
@@ -37,12 +41,23 @@
 				</div>
 			</div>
 			
-			<div class="mt-2">
+			<div class="mt-4">
 				<form th:action="@{/grabarComentario}" th:object="${comentario}" method="post">
-					<div>
-						<div class="">
+					<div class="row g-4">
+						<div class="col-12">
 							<textarea class="form form-control" th:field="*{desComentario}" ></textarea>
-							<button class="btn btn-success mt-2">PUBLICAR</button>
+							
+						</div>
+						
+						
+						<div class="col-4 col-lg-2 d-flex align-items-center gap-3">
+							<input type="number" class="form-control" min="1" max="5" required th:field="*{cantEstrellaComentario}" />
+							<img src="https://images.emojiterra.com/google/android-12l/512px/2b50.png" width="30px" height="30px">
+						</div>
+							
+						
+						<div class="col-4">
+							<button class="btn btn-success">PUBLICAR</button>
 						</div>
 					</div>
 				</form>
