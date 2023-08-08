@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario=new Usuario();
 		usuario.setPasswordUsuario(passwordEncoder.encode(obj.getPasswordUsuario()));
 		usuario.setNomUsuario(obj.getNomUsuario());
-		usuario.setApeUsu(obj.getApeUsu());
+		usuario.setApeUsuario(obj.getApeUsuario());
 		usuario.setCodUsuario(obj.getCodUsuario());
 		usuario.setTelUsuario(obj.getTelUsuario());
 		usuario.setCelUsuario(obj.getCelUsuario());

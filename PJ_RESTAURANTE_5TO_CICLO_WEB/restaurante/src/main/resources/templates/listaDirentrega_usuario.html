@@ -22,6 +22,16 @@
 				href="">NUEVA DIRECCION DE ENTREGA</a>
 			<a class="btn btn-success" th:href="@{nuevoDirentrega_usuario}">NUEVO DIRECCION DE ENTREGA</a>
 		</div>
+		
+		<div class="row row-cols-auto mb-4">
+			<div class="col">
+				<img th:src="'data:image;base64,' + ${session.imagen}" width="100px" height="100px" />
+			</div>
+			<div class="col fw-bold">
+				<p>USUARIO: <i th:text="@{${session.usuario.nomUsuario} + ${session.usuario.nomUsuario}} " ></i> </p>
+				<p>ESTADO: <i th:text="${session.usuario.estadoUsuario}" ></i> </p>
+			</div>
+		</div>
 
 		<div class="card table-responsive">
 			<table class="table table-bordered">

@@ -50,7 +50,7 @@ public class Usuario implements Serializable {
 	@Column(name="nom_usuario")
 	private String nomUsuario;
 	@Column(name="ape_usuario")
-	private String apeUsu;
+	private String apeUsuario;
 	@Column(name="tel_usuario")
 	private String telUsuario;
 	@Column(name="cel_usuario")
