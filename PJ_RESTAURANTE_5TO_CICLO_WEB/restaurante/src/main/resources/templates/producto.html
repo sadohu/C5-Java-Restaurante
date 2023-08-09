@@ -16,7 +16,7 @@
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
-	<div  th:replace="../static/include/head" ></div>
+	<div th:replace="../static/include/head"></div>
 
 	<style>
 		.modal-header {
@@ -69,58 +69,63 @@
 </head>
 
 <body>
-	
+
 	<div th:replace="../static/include/navbar"></div>
-	
+
 	<div class="container bg-light pt-4">
 
 		<h3 class="text-center">LISTADO DE PRODUCTOS</h3>
-			  
-	  	<a th:href="@{/nuevoProducto}" class="btn btn-primary btn-sm mb-3">Nuevo Producto</a>
-	  	
-	  	
-	  	
-	  	
-	  	
-	   
-		
-	    <div class="mt-5">
-	    <!--INICIO DE TABLE-->
-	    <table id="tableMedicamentos" class="table table-striped" style="width:100%">   <thead>						   <tr>				                <th>Código</th>
-					                <th>Nombre</th>				                <th>Descripcion</th>
-					                <th>Stock</th>
-					                <th>Precio</th>
-					                <th>Imagen</th>
-					                <th>Categoria</th>
-					                <th></th>
-					                <th></th>
-					            </tr>
-							  </thead>
-							  <tbody>
-							 
-								<tr th:each="row:${listaProductos}">
-								
-							      <td th:text="${row.idProducto}"></td>
-							      <td th:text="${row.nomProducto}"></td>
-							    
-							      <td th:text="${row.desProducto}"></td>
-							      <td th:text="${row.stockProducto}"></td>
-							      <td th:text="${row.preciouniProducto}"></td>
-							      <td th:text="${row.imagenProducto}"></td>
-							     
-							      <td th:text="${row.cate.desCategoriaProducto}"></td>
-							      
-							      <td><a th:href="@{/actualizaProducto/{id}(id=${row.idProducto})}"  class="btn btn-info btn-editar"><i class="bi bi-pencil"></i></a></td>
-							      
-							      <td><a class="btn btn-danger btn-eliminar"><i class="bi bi-trash-fill"></i></a></td>
-							    </tr> 
-							    
-							  </tbody>
-    </table>
-    <!--FIN DE TABLE-->
-	</div>    
-	    
-	  
+
+		<a th:href="@{/nuevoProducto}" class="btn btn-primary btn-sm mb-3">Nuevo Producto</a>
+
+
+
+
+
+
+
+		<div class="mt-5">
+			<!--INICIO DE TABLE-->
+			<table id="tableMedicamentos" class="table table-striped" style="width:100%">
+				<thead>
+					<tr>
+						<th>Código</th>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Stock</th>
+						<th>Precio</th>
+						<th>Imagen</th>
+						<th>Categoria</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="row:${listaProductos}">
+
+						<td th:text="${row.idProducto}"></td>
+						<td th:text="${row.nomProducto}"></td>
+
+						<td th:text="${row.desProducto}"></td>
+						<td th:text="${row.stockProducto}"></td>
+						<td th:text="${row.preciouniProducto}"></td>
+						<td th:text="${row.imagenProducto}"></td>
+
+						<td th:text="${row.cate.desCategoriaProducto}"></td>
+
+						<td><a th:href="@{/actualizaProducto/{id}(id=${row.idProducto})}"
+								class="btn btn-info btn-editar"><i class="bi bi-pencil"></i></a></td>
+
+						<td><a class="btn btn-danger btn-eliminar"><i class="bi bi-trash-fill"></i></a></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<!--FIN DE TABLE-->
+		</div>
+
+
 	</div>
 
 	<!-- JS principal -->
@@ -191,17 +196,17 @@
 
 			let cod;
 
-			cod=$(this).parents("tr").find("td")[0].innerHTML;
-			
-	
-			alertify.confirm("SISTEMA","Seguro de eliminar!",
-				  function(){
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+
+
+			alertify.confirm("SISTEMA", "Seguro de eliminar!",
+				function () {
 					//redirecciona al controlador ProductoController
 					window.location = "/eliminarProducto/" + cod;
-				  },
-				  function(){ 
+				},
+				function () {
 					alertify.error('Cancelado!');
-				  		});
+				});
 		})
 		//-------------FIN ASIGNAR EVENTO CLICK AL DE LA CLASE btn-eliminar para ELIMINAR----
 

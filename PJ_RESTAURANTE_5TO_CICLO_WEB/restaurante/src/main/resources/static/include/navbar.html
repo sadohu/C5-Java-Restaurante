@@ -36,16 +36,17 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>
 			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
+			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="/comentario">HOME COMENTARIOS</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
-			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
+				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME CARRITO</a>
 			</li>
 		</ul>
 
