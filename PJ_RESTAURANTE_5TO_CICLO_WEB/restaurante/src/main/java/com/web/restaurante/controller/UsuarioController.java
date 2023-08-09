@@ -79,14 +79,21 @@ public class UsuarioController {
 	 * "loginRestaurante"; }
 	 */
 	
-	@GetMapping("/listaUsuario")
+	@GetMapping({"/listaUsuario"})
 	public String listaUsuario (Model model) {
 		
 		List<Usuario> listaUsuario = service.listarUsuario();
+		Usuario usuario = new Usuario();
+		usuario.setEstadoUsuario("ACTIVO");
+		usuario.setFecharegUsuario(new java.sql.Date(new java.util.Date().getTime()));
+		
 		
 		model.addAttribute("listaUsuario",listaUsuario);
-		
 		model.addAttribute("Base64",new EncodeBase64());
+		model.addAttribute("usuario",usuario);
+		model.addAttribute("listaDistrito",distritoService.listarDistrito());
+		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
+		
 		
 		return "listaUsuario";
 	}

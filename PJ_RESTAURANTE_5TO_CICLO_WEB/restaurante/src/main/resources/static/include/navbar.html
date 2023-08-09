@@ -12,7 +12,7 @@
 				<div class="" role="button" data-bs-toggle="dropdown">
 					<a class="nav-link">ADMIN</a>
 				</div>
-				
+
 				<div class="dropdown  ">
 					<ul class="dropdown-menu dropdown-menu-dark">
 						<li class="dropdown-item">
@@ -20,6 +20,10 @@
 						</li>
 						<li class="dropdown-item">
 							<a class="nav-link" href="/listaColaborador">COLABORADOR</a>
+						</li>
+
+						<li class="dropdown-item">
+							<a class="nav-link" th:href="@{/listaProducto/{rol}(rol=colaborador)}">PRODUCTO</a>
 						</li>
 
 					</ul>
@@ -32,19 +36,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/listaProducto">HOME PRODUCTO</a>
-			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="/comentario">HOME COMENTARIOS</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/homeProducto">HOME PRODUCTO</a>
+				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="/homeProducto">HOME PRODUCTO</a>
+				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
 			</li>
 		</ul>
 

@@ -20,12 +20,19 @@ public class ProductoController {
 	@Autowired
 	private CategoriaProService serviceCat;
 	
-	@GetMapping("/listaProducto")
-	public String listadoEmpleados(Model model) {
+	@GetMapping("listaProducto/{rol}")
+	public String listadoEmpleados(@PathVariable(value = "rol") String rol,Model model) {
+		
 		model.addAttribute("listaProductos",service.listaProducto());
+		model.addAttribute("listaCategoria",serviceCat.listaCateProducto());
 		//model.addAttribute("Base64",new  EncodeBase64());
-		return "producto";
+		
+		if(rol.equals("colaborador")) return "producto";
+		
+		return "homeProducto";
+		
 	}
+	
 	@GetMapping("/nuevoProducto")
 	public String registroProductoFormulario(Model model) {
 		//
