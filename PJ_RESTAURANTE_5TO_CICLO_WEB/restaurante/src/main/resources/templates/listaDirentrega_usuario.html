@@ -23,7 +23,7 @@
 			<a class="btn btn-success" th:href="@{nuevoDirentrega_usuario}">NUEVO DIRECCION DE ENTREGA</a>
 		</div>
 		
-		<div class="row row-cols-auto mb-4">
+		<div th:if="${session.usuario}!=null" class="row row-cols-auto mb-4">
 			<div class="col">
 				<img th:src="'data:image;base64,' + ${session.imagen}" width="100px" height="100px" />
 			</div>
