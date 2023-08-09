@@ -28,7 +28,8 @@
 				<img th:src="'data:image;base64,' + ${session.imagen}" width="100px" height="100px" />
 			</div>
 			<div class="col fw-bold">
-				<p>USUARIO: <i th:text="@{${session.usuario.nomUsuario} + ${session.usuario.nomUsuario}} " ></i> </p>
+				<p>NOMBRE: <i th:text="${session.usuario.nomUsuario} + ' ' + ${session.usuario.apeUsuario} " ></i> </p>
+				<p>USUARIO: <i th:text="${session.usuario.emailUsuario}" ></i> </p>
 				<p>ESTADO: <i th:text="${session.usuario.estadoUsuario}" ></i> </p>
 			</div>
 		</div>
