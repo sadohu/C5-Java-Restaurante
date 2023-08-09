@@ -8,109 +8,128 @@
 <body>
 	<div th:replace="../static/include/navbar"></div>
 
-	<div class="container bg-light vh-100">
+	<section class="container bg-light vh-100">
 		<div>
 			<h2>GESTIONAR USUARIO</h2>
 		</div>
 
 		<div>
-		
-		<div th:if="${param.success}">
-    <div class="alert alert-info">Se registró correctamente...</div>
-   </div>
-   <div class="card-header">
-    <h3 class="text-center">Formulario Registro Usuario</h3>
-   </div>
-   <div class="card-body">
-		
-			<form role="form"  method="post" th:action="@{/registraUsuario/guardar}" th:object="${usuario}"  enctype="multipart/form-data">
 
-				<div class="d-flex flex-column gap-2">
-					<div class="row row-cols-3 ">
-						<div>
-							<label>ID</label>
-							<input class="form-control" th:field="*{idUsuario}" type="text" placeholder="ID" readonly/>
+			<div th:if="${param.success}">
+				<div class="alert alert-info">Se registró correctamente...</div>
+			</div>
+			<div class="card-header">
+				<h3 class="text-center">Formulario Registro Usuario</h3>
+			</div>
+			<div class="card-body">
+
+				<form role="form" method="post" th:action="@{/registraUsuario/guardar}" th:object="${usuario}"
+					enctype="multipart/form-data">
+
+					<div class="d-flex flex-column gap-2">
+						<div class="row row-cols-3 ">
+							<div>
+								<label>ID</label>
+								<input class="form-control" th:field="*{idUsuario}" type="text" placeholder="ID"
+									readonly />
+							</div>
+							<div>
+								<label>FECHA REG</label>
+								<input class="form-control" th:field="*{fecharegUsuario}" type="date"
+									placeholder="FECHA" readonly />
+							</div>
+							<div>
+								<label>ESTADO</label>
+								<input class="form-control" th:field="*{estadoUsuario}" type="text" placeholder="ESTADO"
+									readonly />
+							</div>
+						</div>
+
+						<div class="row row-cols-2 g-2">
+
+							<div>
+								<label for="nomUsuario">NOMBRE</label>
+								<input class="form-control" th:field="*{nomUsuario}" type="text" placeholder="NOMBRE"
+									name="nomUsuario" />
+								<p th:errors="*{nomUsuario}" class="text-danger"
+									th:if="${#fields.hasErrors('nomUsuario')}"></p>
+							</div>
+							<div>
+								<label for="apeUsuario">APELLIDO</label>
+								<input th:field="*{apeUsuario}" type="text" placeholder="APELLIDO" name="apeUsuario"
+									class="form-control" />
+								<p th:errors="*{apeUsu}" class="text-danger" th:if="${#fields.hasErrors('apeUsuario')}">
+								</p>
+							</div>
+
+							<div>
+								<label for="codUsuario">NOMBRE DE USUARIO</label>
+								<input class="form-control" th:field="*{codUsuario}" type="text"
+									placeholder="Nombre de Usuario" name="codUsuario" />
+							</div>
+
+							<div>
+								<label>TIPO</label>
+								<select th:field="*{tipoUsuario.idTipoUsuario}" class="form-select">
+									<option th:each="tipoUsuario : ${listaTipoUsuario}"
+										th:value="${tipoUsuario.idTipoUsuario}" th:text="${tipoUsuario.desTipoUsuario}">
+									</option>
+								</select>
+							</div>
+							<div>
+								<label for="telUsuario">TELEFONO</label>
+								<input class="form-control" th:field="*{telUsuario}" type="tel" placeholder="Telefono"
+									name="telUsuario" />
+							</div>
+							<div>
+								<label for="celUsuario">CELULAR</label>
+								<input class="form-control" th:field="*{celUsuario}" type="tel" placeholder="Celular"
+									name="celUsuario" />
+							</div>
+							<div>
+								<label>DISTRITO</label>
+								<select th:field="*{distritoUsuario}" class="form-select">
+									<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}"
+										th:text="${distrito.desDistrito}"></option>
+								</select>
+							</div>
+							<div>
+								<label for="dirUsuario">DIRECCION</label>
+								<input class="form-control" th:field="*{dirUsuario}" type="text" placeholder="Direccion"
+									name="dirUsuario" />
+							</div>
+							<div>
+								<label for="dniUsuario">DNI</label>
+								<input class="form-control" th:field="*{dniUsuario}" type="text" placeholder="DNI"
+									name="dniUsuario" />
+							</div>
+							<div>
+								<label for="emailUsuario">EMAIL</label>
+								<input class="form-control" th:field="*{emailUsuario}" type="email" placeholder="EMAIL"
+									name="emailUsuario" />
+							</div>
+							<div>
+								<label for="passwordUsuario">PASSWORD</label>
+								<input class="form-control" th:field="*{passwordUsuario}" type="text"
+									placeholder="Password" name="passwordUsuario" />
+							</div>
+							<div>
+								<label>IMAGEN</label>
+								<input class="form-control" name="imagen" type="file" th:field:"*{imagenUsuario}" />
+							</div>
 						</div>
 						<div>
-							<label>FECHA REG</label>
-							<input class="form-control" th:field="*{fecharegUsuario}" type="date" placeholder="FECHA" readonly />
-						</div>
-						<div>
-							<label>ESTADO</label>
-							<input class="form-control"  th:field="*{estadoUsuario}" type="text" placeholder="ESTADO" readonly/>
+							<button class="btn btn-success" type="submit">GRABAR</button>
+							<span>Estás registrado?
+								<a th:href="@{/login}">Ingresar aquí</a>
 						</div>
 					</div>
 
-					<div class="row row-cols-2 g-2">
+				</form>
+			</div>
 
-						<div>
-							<label for="nomUsuario">NOMBRE</label>
-							<input class="form-control" th:field="*{nomUsuario}" type="text" placeholder="NOMBRE" name="nomUsuario" />
-							<p th:errors="*{nomUsuario}" class="text-danger" th:if="${#fields.hasErrors('nomUsuario')}"></p>
-						</div>
-						<div>
-							<label for="apeUsuario">APELLIDO</label>
-							<input th:field="*{apeUsuario}" type="text" placeholder="APELLIDO" name="apeUsuario"  class="form-control" />
-							<p th:errors="*{apeUsu}" class="text-danger" th:if="${#fields.hasErrors('apeUsuario')}"></p>
-						</div>
-						
-						<div>
-							<label for="codUsuario">NOMBRE DE USUARIO</label>
-							<input class="form-control" th:field="*{codUsuario}" type="text" placeholder="Nombre de Usuario" name="codUsuario" />
-						</div>
-						
-						<div>
-							<label>TIPO</label>
-							<select th:field="*{tipoUsuario.idTipoUsuario}" class="form-select">
-								<option th:each="tipoUsuario : ${listaTipoUsuario}" th:value="${tipoUsuario.idTipoUsuario}" th:text="${tipoUsuario.desTipoUsuario}"></option>
-							</select>
-						</div>
-						<div>
-							<label for="telUsuario">TELEFONO</label>
-							<input class="form-control" th:field="*{telUsuario}" type="tel" placeholder="Telefono" name="telUsuario" />
-						</div>
-						<div>
-							<label for="celUsuario">CELULAR</label>
-							<input class="form-control" th:field="*{celUsuario}" type="tel" placeholder="Celular" name="celUsuario" />
-						</div>
-						<div>
-							<label>DISTRITO</label>
-							<select th:field="*{distritoUsuario}" class="form-select">
-								<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}" th:text="${distrito.desDistrito}"></option>
-							</select>
-						</div>
-						<div>
-							<label for="dirUsuario">DIRECCION</label>
-							<input class="form-control" th:field="*{dirUsuario}" type="text" placeholder="Direccion"  name="dirUsuario" />
-						</div>
-						<div>
-							<label for="dniUsuario">DNI</label>
-							<input class="form-control" th:field="*{dniUsuario}" type="text" placeholder="DNI"  name="dniUsuario"/>
-						</div>
-						<div>
-							<label for="emailUsuario">EMAIL</label>
-							<input class="form-control" th:field="*{emailUsuario}" type="email" placeholder="EMAIL" name="emailUsuario" />
-						</div>
-						<div>
-							<label for="passwordUsuario">PASSWORD</label>
-							<input class="form-control" th:field="*{passwordUsuario}" type="text" placeholder="Password" name="passwordUsuario" />
-						</div>
-						<div>
-							<label>IMAGEN</label>
-							<input class="form-control" name="imagen" type="file" th:field:"*{imagenUsuario}" />
-						</div>
-					</div>
-					<div>
-						<button class="btn btn-success" type="submit">GRABAR</button>
-						 <span>Estás registrado?
-     				 <a th:href="@{/login}">Ingresar aquí</a>
-					</div>
-				</div>
-
-			</form>
 		</div>
-
-	</div>
+	</section>
 
 </body>
 
