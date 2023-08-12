@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.web.restaurante.business.CategoriaProService;
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.model.CategoriaProducto;
 import com.web.restaurante.model.Producto;
 import com.web.restaurante.reuzable.EncodeBase64;
+
+import jakarta.servlet.http.HttpSession;
 @Controller
 public class ProductoController {
 	@Autowired
@@ -46,11 +50,25 @@ public class ProductoController {
 		//retornamos a la vista registroEmpleado
 		return "registroProducto";
 	}
+	
+	@GetMapping("")
+	public String llenarCarroCompra (Model model,HttpSession session,int id){
+		
+		Producto itemProducto = service.listaProductoPorId(id);
+		
+		List<Producto> carrito = new ArrayList<>();
+		carrito.add(itemProducto);
+		
+		session.setAttribute("carrito", carrito);
+		
+		return "";
+	}
+	
 	@PostMapping("/guardarProducto")
 	public String registroProducto(@ModelAttribute("producto") Producto producto) {
 		
 		service.registrarProducto(producto);
-		return "redirect:/listaProducto";
+		return "redirect:/nuevoProducto";
 		/* return "redirect:/"; */
 	}
 	
