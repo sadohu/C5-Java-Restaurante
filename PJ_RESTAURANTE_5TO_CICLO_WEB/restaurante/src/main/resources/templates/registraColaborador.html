@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="../static/include/head"></div>
+	<title>COLABORADOR</title>
+</head>
+
+<body>
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container bg-light vh-100">
+		<div>
+			<h2>GESTIONAR COLABORADOR</h2>
+		</div>
+
+		<div>
+			<form th:action="@{/grabarColaborador}" th:object="${colaborador}" method="POST" enctype="multipart/form-data">
+
+				<div class="d-flex flex-column gap-2">
+					<div class="row row-cols-3 ">
+						<div>
+							<label>ID</label>
+							<input class="form-control" th:field="*{idColaborador}" type="text" readonly />
+						</div>
+						<div>
+							<label>FECHA REG</label>
+							<input class="form-control" th:field="*{fecharegColaborador}" type="date" readonly/>
+						</div>
+						<div>
+							<label>ESTADO</label>
+							<input class="form-control" th:field="*{estadoColaborador}" type="text" readonly/>
+						</div>
+					</div>
+
+					<div class="row row-cols-2 g-2">
+
+						<div>
+							<label>NOMBRE</label>
+							<input class="form-control" th:field="*{nomColaborador}" type="text" />
+						</div>
+						<div>
+							<label>APELLIDO</label>
+							<input class="form-control" th:field="*{apeColaborador}" type="text" />
+						</div>
+						
+						<div>
+							<label>DNI</label>
+							<input class="form-control" th:field="*{dniColaborador}" type="text" />
+						</div>
+						<div>
+							<label>TIPO</label>
+							<select th:field="*{tipoColaborador.idTipoColaborador}" class="form-select">
+								<option th:each="tipoColaborador : ${listaTipoColaborador}" th:value="${tipoColaborador.idTipoColaborador}" th:text="${tipoColaborador.desTipoColaborador}"></option>
+							</select>
+						</div>
+						<div>
+							<label>IMAGEN</label>
+							<input class="form-control" name="imagen" type="file" th:field:"*{imagenColaborador}" />
+						</div>
+					</div>
+					<div>
+						<button class="btn btn-success" type="submit">GRABAR</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

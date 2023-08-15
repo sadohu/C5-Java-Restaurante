@@ -10,5 +10,6 @@ public interface UsuarioService {
 	public void registrarUsuario(Usuario obj);
 	public void eliminarUsuario(int id);
 	public Usuario buscarUsuario(int id);
+	Usuario buscarPorEmail(String email);
 	
 }

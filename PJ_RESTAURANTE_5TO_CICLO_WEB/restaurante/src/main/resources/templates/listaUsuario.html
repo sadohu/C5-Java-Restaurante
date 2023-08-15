@@ -22,6 +22,10 @@
 			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO USUARIO</a>
 		</div>
 
+		<div class="my-4">
+			<a class="btn btn-primary" th:href="@{/logout}">CERRAR SESION</a>
+		</div>
+
 		<div class="card table-responsive">
 			<table class="table table-bordered">
 				<thead>
@@ -39,19 +43,19 @@
 				</thead>
 				<tbody>
 					<tr th:each="usuario : ${listaUsuario}">
-						<td th:text="${usuario.id_usuario}"></td>
-						<td th:text="${usuario.tipo_usuario.des_tipo_usuario}"></td>
-						<td th:text="${usuario.nom_usuario}"></td>
-						<td th:text="${usuario.ape_usuario}"></td>
-						<td th:text="${usuario.distrito_usuario.des_distrito}"></td>
-						<td th:text="${usuario.email_usuario}"></td>
+						<td th:text="${usuario.idUsuario}"></td>
+						<td th:text="${usuario.tipoUsuario.desTipoUsuario}"></td>
+						<td th:text="${usuario.nomUsuario}"></td>
+						<td th:text="${usuario.apeUsuario}"></td>
+						<td th:text="${usuario.distritoUsuario.desDistrito}"></td>
+						<td th:text="${usuario.emailUsuario}"></td>
 						<td>
-							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagen_usuario)}}"
+							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(usuario.imagenUsuario)}}"
 								width="100px" height="100px" />
 						</td>
-						<td th:text="${usuario.estado_usuario}"></td>
+						<td th:text="${usuario.estadoUsuario}"></td>
 						<td>
-							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.id_usuario})}"
+							<a th:href="@{/actualizaUsuario/{id}(id=${usuario.idUsuario})}"
 								class="btn btn-primary">EDITAR</a>
 						</td>
 					</tr>
@@ -71,88 +75,8 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div>
-						<form th:action="@{grabarUsuario}" th:object="${usuario}" method="post">
-
-							<div class="d-flex flex-column gap-3">
-								<div class="row row-cols-3 ">
-									<div>
-										<label>ID</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>FECHA REG</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>ESTADO</label>
-										<input class="form-control" type="text" />
-									</div>
-								</div>
-
-								<div class="row row-cols-2 g-2">
-
-									<div>
-										<label>NOMBRE</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>APELLIDO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>TIPO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>TELEFONO</label>
-										<input class="form-control" type="tel" />
-									</div>
-									<div>
-										<label>CELULAR</label>
-										<input class="form-control" type="tel" />
-									</div>
-									<div>
-										<label>DISTRITO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>DIRECCION</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>DNI</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>EMAIL</label>
-										<input class="form-control" type="email" />
-									</div>
-									<div>
-										<label>PASSWORD</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>IMAGEN</label>
-										<input class="form-control" type="file" />
-									</div>
-									<div>
-										<label>ESTADO</label>
-										<input class="form-control" type="text" />
-									</div>
-								</div>
-
-								<div class="modal-footer">
-									<div>
-										<button type=submit class="btn btn-success">GRABAR</button>
-									</div>
-								</div>
-
-							</div>
-
-
-						</form>
-					</div>
+					
+					<section th:insert="registraUsuario::fragGestionUsuario"></section>
 				</div>
 			</div>
 		</div>

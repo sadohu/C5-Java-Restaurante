@@ -16,7 +16,7 @@
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
-	<div  th:replace="../static/include/head" ></div>
+	<div th:replace="../static/include/head"></div>
 
 	<style>
 		.modal-header {
@@ -69,128 +69,19 @@
 </head>
 
 <body>
-	
+
 	<div th:replace="../static/include/navbar"></div>
-	
+
 	<div class="container bg-light pt-4">
 
 		<h3 class="text-center">LISTADO DE PRODUCTOS</h3>
 
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMedicamento">
-			Nuevo Producto
-		</button>
-
-		<!-- Modal PARA REGISTRAR-->
-		<div class="modal fade" id="modalMedicamento" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-			aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">PRODUCTO</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<!--Inicio del formulario -->
-						<form id="formDocente" action="/medicamento/grabar" method="post" class="row g-3">
-							<div class="form-group col-md-4">
-								<label for="validationCustomUsername" class="form-label fw-bold">Código</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-file-person"></i></span>
-
-									<input type="text" class="form-control" name="codigo" id="idCodigo" readonly
-										value="0">
-								</div>
-							</div>
-							<div class="form-group col-12">
-								<label for="validationCustomUsername" class="form-label fw-bold">Nombre</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-file-person"></i></span>
-
-									<input type="text" class="form-control" name="nombre" id="idNombre">
-								</div>
-							</div>
-							<div class="form-group col-12">
-								<label for="validationCustomUsername" class="form-label fw-bold">Descripción</label>
-								<div class="input-group has-validation">
-
-									<textarea class="form-control" id="idDescripcion" rows="6" name="descripcion"
-										placeholder="Ingresar descripción"
-										style="padding-left: 5px!important;"></textarea>
-								</div>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="validationCustomUsername" class="form-label fw-bold">Stock</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-bank2"></i></span>
-
-									<input type="text" class="form-control" name="stock" id="idStock">
-								</div>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="validationCustomUsername" class="form-label fw-bold">Precio</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-coin"></i></span>
-
-									<input type="text" class="form-control" name="precio" id="idPrecio">
-								</div>
-							</div>
-							<div class="form-group col-12">
-								<label for="validationCustomUsername" class="form-label fw-bold">Imagen</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-file-person"></i></span>
-									<!--Ponemos name al input con el valor de data que se usara en el medicamento
-					controller para usarlo en request param-->
-									<input type="file" class="form-control" name="data">
-								</div>
-							</div>
-							<!--<div class="form-group col-md-4">
-				    <label for="validationCustomUsername" class="form-label fw-bold">Fecha Vencimiento</label>
-				    <div class="input-group has-validation">
-				      <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-calendar-date"></i></span>
-				      <i class="fas fa-calendar-week form-control-feedback2"></i>
-				      
-					<input type="text" style="background-color:#aed6f1" class="form-control" id="usr1"
-									name="fecha" placeholder="YYYY-MM-DD" autocomplete="off" >
-							
-				    </div>
-				  </div>-->
-							<div class="form-group col-md-6">
-								<label for="validationCustomUsername" class="form-label fw-bold">Categoria
-									Producto</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend"><i
-											class="bi bi-prescription2"></i></span>
-
-									<!--INICIO DE COMBOBOX-->
-
-									<select class="form-select form-control" name="tipo" id="idTipo">
-										<option value=" ">[Seleccione Categoria Producto]</option>
-
-										<option th:each="bean:${tipos}" th:utext="${bean.nombre}"
-											th:value="${bean.codigo}" />
-									</select>
-									<!--FIN DE COMBOBOX-->
-								</div>
-							</div>
+		<a th:href="@{/nuevoProducto}" class="btn btn-primary btn-sm mb-3">Nuevo Producto</a>
 
 
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i>
-									Grabar</button>
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
-										class="bi bi-x-circle-fill"></i> Cerrar</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--fin modal PARA REGISTRAR-->
+
+
+
 
 
 		<div class="mt-5">
@@ -203,7 +94,7 @@
 						<th>Descripcion</th>
 						<th>Stock</th>
 						<th>Precio</th>
-						<th>Imagen</th>
+						<!--<th>Imagen</th>-->
 						<th>Categoria</th>
 						<th></th>
 						<th></th>
@@ -213,18 +104,18 @@
 
 					<tr th:each="row:${listaProductos}">
 
-						<td th:text="${row.id}"></td>
-						<td th:text="${row.nom_producto}"></td>
+						<td th:text="${row.idProducto}"></td>
+						<td th:text="${row.nomProducto}"></td>
 
-						<td th:text="${row.des_producto}"></td>
-						<td th:text="${row.stock_producto}"></td>
-						<td th:text="${row.preciouni_producto}"></td>
-						<td th:text="${row.imagen_producto}"></td>
+						<td th:text="${row.desProducto}"></td>
+						<td th:text="${row.stockProducto}"></td>
+						<td th:text="${row.preciouniProducto}"></td>
+						<!--<td th:text="${row.imagenProducto}"></td>-->
 
-						<td th:text="${row.tipo.des_categoria_producto}"></td>
+						<td th:text="${row.cate.desCategoriaProducto}"></td>
 
-						<td><a class="btn btn-info btn-editar" data-bs-toggle="modal"
-								data-bs-target="#modalMedicamento"><i class="bi bi-pencil"></i></a></td>
+						<td><a th:href="@{/actualizaProducto/{id}(id=${row.idProducto})}"
+								class="btn btn-info btn-editar"><i class="bi bi-pencil"></i></a></td>
 
 						<td><a class="btn btn-danger btn-eliminar"><i class="bi bi-trash-fill"></i></a></td>
 					</tr>
@@ -310,17 +201,12 @@
 
 			alertify.confirm("SISTEMA", "Seguro de eliminar!",
 				function () {
-
-					window.location = "eliminar?codigo=" + cod;
+					//redirecciona al controlador ProductoController
+					window.location = "/eliminarProducto/" + cod;
 				},
 				function () {
 					alertify.error('Cancelado!');
 				});
-
-
-
-
-
 		})
 		//-------------FIN ASIGNAR EVENTO CLICK AL DE LA CLASE btn-eliminar para ELIMINAR----
 

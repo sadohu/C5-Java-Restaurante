@@ -1,14 +1,9 @@
 package com.web.restaurante.controller;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Base64;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import java.io.IOException;
 import java.util.List;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,99 +11,109 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.Objects;
 import com.web.restaurante.business.DistritoService;
 import com.web.restaurante.business.TipoUsuarioService;
 import com.web.restaurante.business.UsuarioService;
 import com.web.restaurante.model.Usuario;
 import com.web.restaurante.reuzable.EncodeBase64;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
+import lombok.AllArgsConstructor;
 
 
 @Controller
-
-@SessionAttributes("session")
+@AllArgsConstructor
 public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService service;
-	@Autowired(required = false)
+	@Autowired
 	private DistritoService distritoService;
 	@Autowired
 	private TipoUsuarioService tipoUsuarioService;
+	
+	private HttpSession session=null;
 
 	
-	@GetMapping("/loginRestaurante")
-	private String login (Model model) {
+	@GetMapping("/login")
+	public String login (Model model) {
 		
 		model.addAttribute("usuario",new Usuario());
 		//session.invalidate();
 		//session.removeAttribute("usuario");
 		
-		return "loginRestaurante";
+		return "login";
 	}
 	
-	@PostMapping("/iniciarSesion")
-	private String iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model,HttpSession session) {
+	@GetMapping("/logout")
+	public String cerrarSession () {
 		
-		List<Usuario> listaUsuario= service.listarUsuario(); 
-		String codigo_usuario = usuario.getCod_usuario();
-		String password_usuario = usuario.getPassword_usuario();
+		session.removeAttribute("usuario");
 		
-		for (Usuario obj :listaUsuario) {
-			if(obj.getCod_usuario().equals(codigo_usuario) && obj.getPassword_usuario().equals(password_usuario)) {
-				
-				//model.addAttribute("Base64",new EncodeBase64().base64ToString(obj.getImagen_usuario()));
-				model.addAttribute("accesoCorrecto",obj.getNom_usuario());
-				model.addAttribute("imagen_usuario",new EncodeBase64().base64ToString(obj.getImagen_usuario()));
-				
-				session.setAttribute("usuario", obj);
-				
-				return "/index";
-			}
-		}
-		
-		model.addAttribute("error","Las credenciales no son correctas");
-		return "loginRestaurante";
+		return "/logout";
 	}
 	
-	@GetMapping("/listaUsuario")
-	private String listaUsuario (Model model,@RequestParam(name="imagenBase64", required=false) String imagenBase64) {
+	/*
+	 * @PostMapping("/iniciarSesion") private String
+	 * iniciarSesion(@ModelAttribute("usuario") Usuario usuario,Model model) {
+	 * 
+	 * List<Usuario> listaUsuario= service.listarUsuario(); String codigo_usuario =
+	 * usuario.getCodUsuario(); String password_usuario =
+	 * usuario.getPasswordUsuario();
+	 * 
+	 * for (Usuario obj :listaUsuario) {
+	 * if(obj.getCodUsuario().equals(codigo_usuario) &&
+	 * obj.getPasswordUsuario().equals(password_usuario)) {
+	 * 
+	 * model.addAttribute("accesoCorrecto",obj.getNomUsuario());
+	 * model.addAttribute("imagen_usuario",new
+	 * EncodeBase64().base64ToString(obj.getImagenUsuario()));
+	 * 
+	 * //session.setAttribute("usuario", obj);
+	 * 
+	 * return "/index"; } }
+	 * 
+	 * model.addAttribute("error","Las credenciales no son correctas"); return
+	 * "loginRestaurante"; }
+	 */
+	
+	@GetMapping({"/listaUsuario"})
+	public String listaUsuario (Model model) {
 		
 		List<Usuario> listaUsuario = service.listarUsuario();
+		Usuario usuario = new Usuario();
+		usuario.setEstadoUsuario("ACTIVO");
+		usuario.setFecharegUsuario(new java.sql.Date(new java.util.Date().getTime()));
+		
 		
 		model.addAttribute("listaUsuario",listaUsuario);
-		
 		model.addAttribute("Base64",new EncodeBase64());
+		model.addAttribute("usuario",usuario);
+		model.addAttribute("listaDistrito",distritoService.listarDistrito());
+		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
 		
-		return "/listaUsuario";
+		
+		return "listaUsuario";
 	}
 	
 	@GetMapping("/registraUsuario")
-	private String registrarUsuario(Model model) {
+	public String registrarUsuario(Model model) {
 		
 		Usuario usuario = new Usuario();
-		usuario.setEstado_usuario("ACTIVO");
-		usuario.setFechareg_usuario(new java.sql.Date(new java.util.Date().getTime()));
+		usuario.setEstadoUsuario("ACTIVO");
+		usuario.setFecharegUsuario(new java.sql.Date(new java.util.Date().getTime()));
 		
 		model.addAttribute("usuario",usuario);
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
 		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
 		
-		return "/registraUsuario";
+		return "registraUsuario";
 	}
 	
 	@GetMapping("/actualizaUsuario/{id}")
-	private String actualizaUsuario(@PathVariable(value="id") int id, Model model) {
+	public String actualizaUsuario(@PathVariable(value="id") int id, Model model) {
 		Usuario usuario = service.buscarUsuario(id);
 		
 		model.addAttribute("usuario",usuario);
@@ -117,23 +122,26 @@ public class UsuarioController {
 		return "/registraUsuario";
 	}
 	
-	@PostMapping("grabarUsuario")
-	private String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario) {
+	@PostMapping("/registraUsuario/guardar")
+	public String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario,BindingResult result,Model model) throws IOException {
 		
-		byte[] imagenByte= null;
 		
-		try {
-
-			imagenByte = imagen.getBytes();
-			usuario.setImagen_usuario(imagenByte);
+		usuario.setImagenUsuario(imagen.getBytes());
 			
-
-		}catch(Exception ex) {
-			
-		}
 		
+		Usuario usuarioExiste=service.buscarPorEmail(usuario.getEmailUsuario());
+		if(Objects.nonNull(usuarioExiste)) {
+			result.reject("emailUsuario",null,"Ya existe un usuario con el email proporcionado");
+		} //Fin del If
+		//si hay errores en tema de validacion
+		if(result.hasErrors()) {
+			//mandamos por atriibuto usuario el usuarioDto
+			model.addAttribute("usuario",usuario);
+			//y lo enviamos a la vista registro .html
+			return "registraUsuario";
+		} // fin de if hasErrros
 		service.registrarUsuario(usuario);
-		return "redirect:/listaUsuario";
+		return "redirect:/registraUsuario?success";
 	}
 	
 

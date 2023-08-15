@@ -1,0 +1,21 @@
+DELIMITER $$
+CREATE PROCEDURE ReportePorCliente()
+BEGIN
+select tu.des_tipo_usuario,u.nom_usuario,u.ape_usuario,
+pro.nom_producto,pro.des_producto,c.nom_colaborador,c.ape_colaborador,
+tc.des_tipo_colaborador,com.monto_compra,mp.des_medio_pago
+from tb_tipo_usuario tu
+inner join tb_usuario u
+on tu.id_tipo_usuario=u.id_tipo_usuario inner join tb_pedido p
+on p.id_usuario_cliente=u.id_usuario  inner join tb_producto_pedido pp
+on pp.id_pedido=p.id_pedido inner join tb_producto pro
+on pp.id_producto=pro.id_producto inner join tb_categoria_producto cp
+on cp.id_categoria_producto=pro.id_categoria_producto
+inner join tb_colaborador c on p.id_colaborador_repartidor	=c.id_colaborador
+inner join tb_tipo_colaborador tc on c.id_tipo_colaborador=tc.id_tipo_colaborador
+inner join tb_compra com on p.id_pedido= com.id_pedido inner join tb_mediopago mp
+on com.id_medio_pago=mp.id_medio_pago;
+END $$
+DELIMITER ;
+
+call ReportePorCliente();

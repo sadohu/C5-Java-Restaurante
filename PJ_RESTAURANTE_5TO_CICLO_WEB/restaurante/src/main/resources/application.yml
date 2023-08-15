@@ -1,6 +1,8 @@
 server:
  port: 9004
  
+ 
+ 
 spring:
  datasource:
   url: "jdbc:mysql://localhost:3306/bd_restaurante_5to_ciclo?useSSL=false&serverTimeZone=UTC"
@@ -12,11 +14,12 @@ spring:
     ddl-auto: update
   properties:
     hibernate: "org.hibernate.dialect.MySqlDialect"
-   
-   
+
 loggin:
  level:
   org:
    hibernate:
     SQL: DEBUG
     type: TRACE
+    
+    

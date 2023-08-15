@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="../static/include/head">
+
+	<title>REGISTRAR USUARIO</title>
+
+</head>
+
+<body>
+
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container pt-3 bg-light vh-100 ">
+		<div>
+			<h2>LISTA DE COLABORADORES</h2>
+		</div>
+
+		<div class="my-4">
+			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
+				href="">NUEVO COLABORADOR</a>
+			<a class="btn btn-success" th:href="@{nuevoColaborador}">NUEVO COLABORADOR</a>
+		</div>
+
+		<div class="card table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>TIPO</th>
+						<th>NOMBRE</th>
+						<th>APELLIDO</th>
+						<th>DNI</th>
+						<th>IMAGEN</th>
+						<th>ESTADO</th>
+						<th>ACCIONES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="colaborador : ${listaColaborador}">
+						<td th:text="${colaborador.idColaborador}"></td>
+						<td th:text="${colaborador.tipoColaborador.desTipoColaborador}"></td>
+						<td th:text="${colaborador.nomColaborador}"></td>
+						<td th:text="${colaborador.apeColaborador}"></td>
+						<td th:text="${colaborador.dniColaborador}"></td>
+						<td>
+							<img th:src="@{'data:image;base64,' + ${Base64.base64ToString(colaborador.imagenColaborador)}}"
+								width="100px" height="100px" />
+						</td>
+						<td th:text="${colaborador.estadoColaborador}"></td>
+						<td>
+							<a th:href="@{/actualizarColaborador/{id}(id=${colaborador.idColaborador})}"
+								class="btn btn-primary">EDITAR</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<!-- INICIAMOS EL MODAL PARA TRATADO DE DATOS -->
+
+	<div class="modal fade modal-lg" id="gestionarUsuario" data-bs-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header text-bg-danger">
+					<h2 class="modal-title fs-5">USUARIO</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form th:action="@{grabarUsuario}" th:object="${usuario}" method="post">
+
+							<div class="d-flex flex-column gap-3">
+								<div class="row row-cols-3 ">
+									<div>
+										<label>ID</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>FECHA REG</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>ESTADO</label>
+										<input class="form-control" type="text" />
+									</div>
+								</div>
+
+								<div class="row row-cols-2 g-2">
+
+									<div>
+										<label>NOMBRE</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>APELLIDO</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>TIPO</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>TELEFONO</label>
+										<input class="form-control" type="tel" />
+									</div>
+									<div>
+										<label>CELULAR</label>
+										<input class="form-control" type="tel" />
+									</div>
+									<div>
+										<label>DISTRITO</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>DIRECCION</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>DNI</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>EMAIL</label>
+										<input class="form-control" type="email" />
+									</div>
+									<div>
+										<label>PASSWORD</label>
+										<input class="form-control" type="text" />
+									</div>
+									<div>
+										<label>IMAGEN</label>
+										<input class="form-control" type="file" />
+									</div>
+									<div>
+										<label>ESTADO</label>
+										<input class="form-control" type="text" />
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<div>
+										<button type=submit class="btn btn-success">GRABAR</button>
+									</div>
+								</div>
+
+							</div>
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
