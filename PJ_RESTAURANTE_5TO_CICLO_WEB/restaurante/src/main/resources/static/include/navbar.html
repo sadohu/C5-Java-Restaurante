@@ -32,10 +32,6 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/index">INICIO</a>
 			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>
-			</li>
 			
 			<li class="nav-item">
 				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
@@ -46,7 +42,7 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME CARRITO</a>
+				<a class="nav-link" th:href="@{/carroCompra}">HOME CARRITO</a>
 			</li>
 			
 			<li class="nav-item">
@@ -55,7 +51,7 @@
 		</ul>
 
 		<div class="d-flex ms-auto">
-			<a class="mt-auto mx-3 text-decoration-none" href="#">
+			<a class="mt-auto mx-3 text-decoration-none" th:href="@{/carroCompra}">
 				<img src="https://storage.googleapis.com/camaracomercio/assets/img/imgCart/cart.png" width="40px"
 					height="40px" />
 			</a>
@@ -79,6 +75,9 @@
 
 					<li class="dropdown-item">
 						DATOS
+					</li>
+					<li class="">
+						<a class="dropdown-item" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>
 					</li>
 					<li class="">
 						<a class="dropdown-item" href="/logout">CERRAR SESION</a>

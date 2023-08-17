@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="../static/include/head"></div>
+	<title>COLABORADOR</title>
+</head>
+
+<body>
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container mt-5">
+
+		<div>
+			<h2>CARRO DE COMPRAS</h2>
+			<hr>
+		</div>
+
+		<div th:if="${session.carrito}" class="list-group list-group-flush">
+			<div th:each=" itemProducto : ${session.carrito}" class="list-group-item list-group-item-action">
+				<div class="row row-cols-auto justify-content-between">
+					<div>
+						<h5>NOMBRE: <span th:text="${itemProducto.nomProducto}"></span></h5>
+						<h5>DESCRIPCION: <span th:text="${itemProducto.nomProducto}"></h5>
+						<h5>PRECIO: <span th:text="${itemProducto.nomProducto}"></h5>
+					</div>
+					<div>
+						<img src="https://elcomercio.pe/resizer/Ayxa_LkfKkMj36SE5a_1CdTJBJI=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/X4H4LE6Y2ZEJ5OSTTCF3MFIH3U.jpg"
+							width="150" height="150px" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mt-4">
+			<button class="btn btn-success">COMPRAR</button>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
