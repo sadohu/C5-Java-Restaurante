@@ -40,9 +40,7 @@ public class PedidoController {
 	
 	@GetMapping("/nuevoPedido")
 	public String registroPedidoFormulario(Model model) {
-		
 		Pedido pedido = new Pedido();
-		
 		model.addAttribute("pedido",pedido);
 		return "registroPedido";
 	}
@@ -50,15 +48,12 @@ public class PedidoController {
 	@PostMapping("/guardarPedido")
 	public String registroPedido(@ModelAttribute("pedido") Pedido pedido) {
 	    pedidoservice.registrarPedido(pedido);
-	    
 	    return "redirect:/";
 	}
 	
 	@GetMapping("/actualizarPedido/{id}")
 	public String actualizarPedidoFormulario(@PathVariable(value="id") int id, Model model) {
-		
 		Pedido pedido = pedidoservice.listaPedidoPorId(id);
-		
 		model.addAttribute("pedido",pedido);
 		
 		return "actualizarPedido";
