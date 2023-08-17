@@ -34,9 +34,6 @@ public class UsuarioController {
 	@Autowired
 	private TipoUsuarioService tipoUsuarioService;
 	
-	private HttpSession session=null;
-
-	
 	@GetMapping("/login")
 	public String login (Model model) {
 		
@@ -48,7 +45,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/logout")
-	public String cerrarSession () {
+	public String cerrarSession (HttpSession session) {
 		
 		session.removeAttribute("usuario");
 		session.removeAttribute("carrito");
@@ -120,7 +117,8 @@ public class UsuarioController {
 		model.addAttribute("usuario",usuario);
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
 		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
-		return "/registraUsuario";
+		
+		return "registraUsuario";
 	}
 	
 	@PostMapping("/registraUsuario/guardar")

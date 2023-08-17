@@ -7,5 +7,5 @@ import com.web.restaurante.model.Pedido;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
-
+	
 }

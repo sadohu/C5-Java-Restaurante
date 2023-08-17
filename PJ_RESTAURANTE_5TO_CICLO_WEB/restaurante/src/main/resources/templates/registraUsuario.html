@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="../static/include/head">
+<head>
+	<div  th:replace="../static/include/head"></div>
 	<title>USUARIO</title>
 </head>
 
@@ -88,7 +89,7 @@
 							</div>
 							<div>
 								<label>DISTRITO</label>
-								<select th:field="*{distritoUsuario}" class="form-select">
+								<select th:field="*{distritoUsuario.idDistrito}" class="form-select">
 									<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}"
 										th:text="${distrito.desDistrito}"></option>
 								</select>
@@ -120,7 +121,7 @@
 						</div>
 						<div>
 							<button class="btn btn-success" type="submit">GRABAR</button>
-							<span>Estás registrado?
+							<span>Estás registrado?</span>
 								<a th:href="@{/login}">Ingresar aquí</a>
 						</div>
 					</div>

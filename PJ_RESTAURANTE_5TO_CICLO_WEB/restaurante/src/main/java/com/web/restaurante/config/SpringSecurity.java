@@ -43,7 +43,7 @@ public class SpringSecurity {
 		           .requestMatchers("/listaUsuario").permitAll())//.hasRole("ADMIN"))
 		  .formLogin(form -> form.loginPage("/login")
 				  .loginProcessingUrl("/login")
-				  .defaultSuccessUrl("/listaUsuario", true)
+				  .defaultSuccessUrl("/index", true)
 				  .permitAll())
 		  .logout(logout -> logout
 				  .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
