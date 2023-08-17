@@ -25,29 +25,24 @@
 						<li class="dropdown-item">
 							<a class="nav-link" th:href="@{/listaProducto/{rol}(rol=colaborador)}">PRODUCTO</a>
 						</li>
-
+						<li class="dropdown-item">
+							<a class="nav-link" th:href="@{/reporte/producto}">REPORTE PRODUCTO</a>
+						</li>
 					</ul>
 				</div>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/index">INICIO</a>
 			</li>
-			
+
 			<li class="nav-item">
-				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">HOME PRODUCTO</a>
+				<a class="nav-link" th:href="@{/listaProducto/{rol}(rol='cliente')}">CARTA</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="/comentario">HOME COMENTARIOS</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" th:href="@{/carroCompra}">HOME CARRITO</a>
+				<a class="nav-link" href="/comentario">COMENTARIOS</a>
 			</li>
 			
-			<li class="nav-item">
-				<a class="nav-link" th:href="@{/reporte/producto}">REPORTE PRODUCTO</a>
-			</li>
 		</ul>
 
 		<div class="d-flex ms-auto">
