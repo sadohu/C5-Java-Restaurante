@@ -61,7 +61,6 @@ public class PedidoController {
 	
 	@GetMapping("/eliminarPedido/{id}")
 	public String eliminarPedido(@PathVariable(value="id") int id) {
-		
 		pedidoservice.eliminarPedido(id);
 		return "refirect:/";
 	}

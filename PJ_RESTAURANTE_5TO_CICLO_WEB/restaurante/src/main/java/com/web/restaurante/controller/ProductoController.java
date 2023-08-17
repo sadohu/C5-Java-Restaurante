@@ -33,8 +33,6 @@ public class ProductoController {
 		
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("listaCategoria",serviceCat.listaCateProducto());
-		//model.addAttribute("Base64",new  EncodeBase64());
-		
 		if (session.getAttribute("carrito")==null) {
 			session.setAttribute("carrito", new ArrayList<Producto>());
 		}
