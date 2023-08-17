@@ -71,13 +71,13 @@
 								</div>
 								<div class="card-body ">
 									<h6>DESCRIPCION:</h6>
-									<ol th:text="${producto.desProducto}"></ol>
+									<p th:text="${producto.desProducto}"></ol>
 									<h6>PRECIO: </h6>
-									<ol th:text="${producto.preciouniProducto}"></ol>
+									<p th:text="${producto.preciouniProducto}"></ol>
 									<h6>STOCK: </h6>
-									<ol th:text="${producto.stockProducto}"></ol>
+									<p th:text="${producto.stockProducto}"></p>
 									<div>
-										<button class="btn btn-success">AGREGAR</button>
+										<a th:href="@{/agregarCarro{id}(id=${producto.idProducto})}" class="btn btn-success">AGREGAR</a>
 									</div>
 								</div>
 							</div>

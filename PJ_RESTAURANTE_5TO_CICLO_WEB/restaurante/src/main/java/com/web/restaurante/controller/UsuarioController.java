@@ -51,6 +51,7 @@ public class UsuarioController {
 	public String cerrarSession () {
 		
 		session.removeAttribute("usuario");
+		session.removeAttribute("carrito");
 		
 		return "/logout";
 	}

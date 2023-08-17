@@ -9,15 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import com.web.restaurante.business.CategoriaProService;
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.model.CategoriaProducto;
 import com.web.restaurante.model.Producto;
-import com.web.restaurante.reuzable.EncodeBase64;
 
 import jakarta.servlet.http.HttpSession;
 @Controller
 public class ProductoController {
+	
+	
 	@Autowired
 	private ProductoService service;
 	//para combobox
@@ -25,11 +29,14 @@ public class ProductoController {
 	private CategoriaProService serviceCat;
 	
 	@GetMapping("listaProducto/{rol}")
-	public String listadoEmpleados(@PathVariable(value = "rol") String rol,Model model) {
+	public String listadoEmpleados(@PathVariable(value = "rol") String rol,Model model,HttpSession session) {
 		
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("listaCategoria",serviceCat.listaCateProducto());
-		//model.addAttribute("Base64",new  EncodeBase64());
+		if (session.getAttribute("carrito")==null) {
+			session.setAttribute("carrito", new ArrayList<Producto>());
+		}
+		
 		
 		if(rol.equals("colaborador")) return "producto";
 		
@@ -51,24 +58,31 @@ public class ProductoController {
 		return "registroProducto";
 	}
 	
-	@GetMapping("")
-	public String llenarCarroCompra (Model model,HttpSession session,int id){
+	@GetMapping("/carroCompra")
+	public String carroCompra (Model model,HttpSession session) {
 		
-		Producto itemProducto = service.listaProductoPorId(id);
 		
-		List<Producto> carrito = new ArrayList<>();
-		carrito.add(itemProducto);
 		
-		session.setAttribute("carrito", carrito);
+		return "carroCompra";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping("agregarCarro{id}")
+	public String llenarCarroCompra (@PathVariable(value="id")int id,Model model,HttpSession session){
+			
+		Producto producto = service.listaProductoPorId(id);
 		
-		return "";
+		((ArrayList<Producto>)session.getAttribute("carrito")).add(producto);
+		
+		
+		return "redirect:/listaProducto/cliente";
 	}
 	
 	@PostMapping("/guardarProducto")
 	public String registroProducto(@ModelAttribute("producto") Producto producto) {
 		
 		service.registrarProducto(producto);
-		return "redirect:/nuevoProducto";
+		return "redirect:/listaProducto/colaborador";
 		/* return "redirect:/"; */
 	}
 	
@@ -91,7 +105,7 @@ public class ProductoController {
 	public String eliminaProducto(@PathVariable(value="id") int id) {
 		
 		service.eliminarProducto(id);
-		return "redirect:/listaProducto";
+		return "redirect:/listaProducto/colaborador";
 		/* return "redirect:/"; */
 	}
 	
