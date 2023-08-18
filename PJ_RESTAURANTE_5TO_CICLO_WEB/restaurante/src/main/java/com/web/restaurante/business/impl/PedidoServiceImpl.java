@@ -53,4 +53,10 @@ public class PedidoServiceImpl implements PedidoService {
 		return obj;
 	}
 
+	@Override
+	public void registrarPedidos(List<Pedido> pedidos) {
+		repository.saveAll(pedidos);
+		
+	}
+
 }

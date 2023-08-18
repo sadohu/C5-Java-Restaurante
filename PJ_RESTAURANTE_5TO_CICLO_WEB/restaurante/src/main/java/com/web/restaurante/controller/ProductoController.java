@@ -57,27 +57,7 @@ public class ProductoController {
 		//retornamos a la vista registroEmpleado
 		return "registroProducto";
 	}
-	
-	@GetMapping("/carroCompra")
-	public String carroCompra (Model model,HttpSession session) {
-		
-		
-		
-		return "carroCompra";
-	}
-	
-	@SuppressWarnings("unchecked")
-	@GetMapping("agregarCarro{id}")
-	public String llenarCarroCompra (@PathVariable(value="id")int id,Model model,HttpSession session){
-			
-		Producto producto = service.listaProductoPorId(id);
-		
-		((ArrayList<Producto>)session.getAttribute("carrito")).add(producto);
-		
-		
-		return "redirect:/listaProducto/cliente";
-	}
-	
+
 	@PostMapping("/guardarProducto")
 	public String registroProducto(@ModelAttribute("producto") Producto producto) {
 		

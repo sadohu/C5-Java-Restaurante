@@ -9,5 +9,6 @@ public interface PedidoService {
 	public void registrarPedido(Pedido obj);
 	public void eliminarPedido(int id);
 	public Pedido listaPedidoPorId(int id);
+	public void registrarPedidos(List<Pedido> pedidos);
 
 }

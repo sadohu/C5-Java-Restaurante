@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlsn:th="http://www.thymleaf.org">
+	<head>
+		<div th:replace="../static/include/head"></div>
+		<title>PEDIDO</title>
+	</head>
+	<body>
+		
+		<div th:replace="../static/include/navbar"></div>
+		
+		<div class="container">
+			
+			<div class="mt-4">
+				<h2>NUEVO PEDIDO</h2>
+				<hr>
+			</div>
+			
+			<div>	
+				<div>
+					<form action="/guardarPedido" th:object="${pedido}" method="post">
+						<div class="d-flex flex-column gap-4">
+							
+							
+							<div class="row g-4">
+								<div class="col" th:if="*{idPedido}!=0">
+									<lable>ID</lable>
+									<input readonly class="form-control" type="text" th:field="*{idPedido}" />
+								</div>
+								<div class="col">
+									<lable>USUARIO</lable>
+									<input readonly class="form-control" type="text"  th:field="*{usuarioCliente.nomUsuario}" />
+								</div>
+								<div class="col">
+									<lable>FECHA REGISTRO</lable>
+									<input readonly class="form-control" type="text" th:field="*{fecharegPedido}" />
+								</div>
+								<div class="col">
+									<lable>ESTADO</lable>
+									<input readonly class="form-control" type="text" th:field="*{estadoPedido}" />
+								</div>
+							</div>
+							
+							<div class="row row-cols-2 g-4">
+								
+								<div>
+									<lable>DIRECCION</lable>
+									<input class="form-control" type="text" th:field="*{direntregaUsuario.desDirentrega}" />
+								</div>
+							</div>
+							
+							<div class="row g-2">
+								<div>
+									<a type="submit" class="btn btn-success">AGREGAR PRODUCTOS</a>
+								</div>
+							</div>
+							
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+	
+</html>
