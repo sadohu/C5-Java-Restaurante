@@ -16,28 +16,66 @@
 			<hr>
 		</div>
 
-		<div th:if="${session.carrito}" class="list-group list-group-flush">
-			<div th:each=" itemProducto : ${session.carrito}" class="list-group-item list-group-item-action">
-				<div class="row row-cols-auto justify-content-between">
-					<div>
-						<h5>NOMBRE: <span th:text="${itemProducto.nomProducto}"></span></h5>
-						<h5>DESCRIPCION: <span th:text="${itemProducto.nomProducto}"></h5>
-						<h5>PRECIO: <span th:text="${itemProducto.nomProducto}"></h5>
-					</div>
-					<div>
+		<table th:if="${session.carrito}" class="table table-hover table-sm">
+			<thead>
+				<tr>
+					<th>IMAGEN</th>
+					<th>NOMBRE</th>
+					<th>DESCRIPCION</th>
+					<th>PRECIO UNIDAD</th>
+					<th>CANTIDAD</th>
+					<th>PRECIO TOTAL</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr th:each=" itemProducto : ${session.carrito}" >
+
+					<td>
 						<img src="https://elcomercio.pe/resizer/Ayxa_LkfKkMj36SE5a_1CdTJBJI=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/X4H4LE6Y2ZEJ5OSTTCF3MFIH3U.jpg"
-							width="150" height="150px" />
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="mt-4">
-			<a href="/nuevoPedido" class="btn btn-success ">GENERAR PEDIDO</a>
-			<a href="#" class="btn btn-primary ">LIMPIAR CARRO</a>
+							width="80px" height="80px" />
+					</td>
+
+					<td th:text="${itemProducto.producto.nomProducto}"></td>
+					<td th:text="${itemProducto.producto.desProducto}"></td>
+					<td th:text="'S/. ' + ${itemProducto.producto.preciouniProducto}"></td>
+					<td th:text="${itemProducto.cantidadProducto}"></td>
+					<td th:text="'S/. ' + ${itemProducto.cantidadProducto} * ${itemProducto.producto.preciouniProducto}"></td>
+					
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="5">TOTAL</th>
+					<th>S/.</th>
+				</tr>
+			</tfoot>
+
+		</table>
+
+		<div th:if="${session.carrito.size}>0" class="mt-4">
+			<a href="/nuevoPedido" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#gestionarPedido">GENERAR PEDIDO</a>
 		</div>
 
 	</div>
+	
+		<!-- INICIAMOS EL MODAL PARA TRATADO DE DATOS -->
+
+	<div class="modal fade modal-lg" id="gestionarPedido" data-bs-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header text-bg-danger">
+					<h2 class="modal-title fs-5">PEDIDO</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					
+					<div th:insert="registraPedido::fragGestionPedido"></div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 </body>
 

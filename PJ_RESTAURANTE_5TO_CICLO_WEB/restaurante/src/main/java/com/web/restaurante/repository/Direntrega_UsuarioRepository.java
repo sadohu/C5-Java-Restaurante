@@ -15,7 +15,7 @@ import java.util.List;
 public interface Direntrega_UsuarioRepository extends JpaRepository<Direntrega_Usuario, Integer> {
 	
 	Direntrega_Usuario findByIdDirentrega(int idDirentrega);
-	Direntrega_Usuario findByUsuario(Usuario usuario);
+	List<Direntrega_Usuario> findByUsuario(Usuario usuario);
 	
 
 }

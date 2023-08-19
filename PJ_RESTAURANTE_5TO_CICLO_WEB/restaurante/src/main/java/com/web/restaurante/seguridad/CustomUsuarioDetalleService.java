@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.web.restaurante.business.ComentarioService;
 import com.web.restaurante.model.*;
 import com.web.restaurante.repository.UsuarioRepository;
 
@@ -26,6 +28,7 @@ public class CustomUsuarioDetalleService implements UserDetailsService {
 
 	private UsuarioRepository repository;
 	private HttpSession session = null;
+	private ComentarioService comentarioService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -37,6 +40,9 @@ public class CustomUsuarioDetalleService implements UserDetailsService {
 			
 			/*ESTA BLOQUE DE CODIGO ALMACENA LA SESSION*/
 			session.setAttribute("usuario", usuario);
+
+			
+			session.setAttribute("listaComentario", comentarioService.listar());
 			session.setAttribute("imagen", Base64.getMimeEncoder().encodeToString(usuario.getImagenUsuario()));
 			/*FIN DEL BLOQUE DEL CODIGO ATTE. LUIS RUIZ*/
 			

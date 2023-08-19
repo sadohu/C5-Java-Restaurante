@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.web.restaurante.business.CategoriaProService;
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.model.CategoriaProducto;
 import com.web.restaurante.model.Producto;
+import com.web.restaurante.model.Producto_Pedido;
 
 import jakarta.servlet.http.HttpSession;
 @Controller
@@ -33,8 +35,14 @@ public class ProductoController {
 		
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("listaCategoria",serviceCat.listaCateProducto());
+		
+		Producto_Pedido productoPedido = new Producto_Pedido();
+		productoPedido.setCantidadProducto(1);
+		
+		model.addAttribute("productoPedido",productoPedido);
+		
 		if (session.getAttribute("carrito")==null) {
-			session.setAttribute("carrito", new ArrayList<Producto>());
+			session.setAttribute("carrito", new ArrayList<Producto_Pedido>());
 		}
 		
 		
@@ -87,6 +95,26 @@ public class ProductoController {
 		service.eliminarProducto(id);
 		return "redirect:/listaProducto/colaborador";
 		/* return "redirect:/"; */
+	}
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping("/agregarCarro/{id}")
+	public String llenarCarroCompra (@PathVariable(value="id")int id,
+			@ModelAttribute("productoPedido")Producto_Pedido productoPedido,Model model,HttpSession session,
+			RedirectAttributes flash) {
+		
+		String mensaje="¡ PRODUCTO AGREGADO !";
+		
+		Producto producto = service.listaProductoPorId(id);
+		
+		productoPedido.setProducto(producto);
+		
+		((ArrayList<Producto_Pedido>)session.getAttribute("carrito")).add(productoPedido);
+
+		flash.addFlashAttribute("mensaje",mensaje);
+		flash.addFlashAttribute("idProducto",id);
+		
+		return "redirect:/listaProducto/cliente";
 	}
 	
 	

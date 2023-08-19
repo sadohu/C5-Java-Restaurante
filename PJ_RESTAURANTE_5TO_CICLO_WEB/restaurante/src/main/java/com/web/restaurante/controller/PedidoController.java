@@ -56,6 +56,8 @@ public class PedidoController {
 		List<Pedido> listaPedido = new ArrayList<>();
 		listaPedido = pedidoService.listarPorUsuario(usuario);
 		
+		
+		
 		model.addAttribute("listaPedido",listaPedido);
 		model.addAttribute("Base64",new EncodeBase64());
 		return "listaPedido";
@@ -68,8 +70,10 @@ public class PedidoController {
 		pedido.setEstadoPedido("ACTIVO");
 		pedido.setFecharegPedido(new Date(new java.util.Date().getTime()));
 		
+		Usuario usuario = (Usuario)session.getAttribute("usuario");
 		
-		List<Direntrega_Usuario> listaDirentrega = direntrega_UsuarioService.listar();
+		
+		List<Direntrega_Usuario> listaDirentrega = direntrega_UsuarioService.listarPorUsuario(usuario);
 		List<Colaborador> listaColaborador = colaboradorService.listar();
 		
 		model.addAttribute("listaColaborador",listaColaborador);
@@ -92,22 +96,10 @@ public class PedidoController {
 		
 		/*AGREGAMOS LOS PRODUCTOS AL DETALLE DEL PEDIDO*/
 		
-		List<Producto> productos = (List<Producto>)session.getAttribute("carrito");
+		List<Producto_Pedido> productos = (List<Producto_Pedido>)session.getAttribute("carrito");
+		productos.forEach((c)->c.setPedido(pedido));
 		
-		Producto_Pedido producto_Pedido = new Producto_Pedido();
-		int idProductoPedido=0;
-		
-		for (Producto producto : productos) {
-			idProductoPedido ++;
-			producto_Pedido = new Producto_Pedido();
-			producto_Pedido.setPedido(pedido);
-			producto_Pedido.setIdProductoPedido(idProductoPedido);
-			producto_Pedido.setProducto(producto);
-			producto_Pedido.setCantidadProducto(1);
-
-			producto_PedidoService.agregar(producto_Pedido);
-			
-		}
+		producto_PedidoService.agregarProductos(productos);
 		
 		
 	    return "redirect:/listaPedido";
@@ -131,22 +123,12 @@ public class PedidoController {
 	@GetMapping("/carroCompra")
 	public String carroCompra (Model model,HttpSession session) {
 		
-		
+		registroPedidoFormulario(model, session);
 		
 		return "carroCompra";
 	}
 	
-	@SuppressWarnings("unchecked")
-	@GetMapping("/agregarCarro{id}")
-	public String llenarCarroCompra (@PathVariable(value="id")int id,Model model,HttpSession session){
-			
-		Producto producto = productoService.listaProductoPorId(id);
-		
-		((ArrayList<Producto>)session.getAttribute("carrito")).add(producto);
-		
-		
-		return "redirect:/listaProducto/cliente";
-	}
+	
 	
 	
 } //Fin de pedido controller

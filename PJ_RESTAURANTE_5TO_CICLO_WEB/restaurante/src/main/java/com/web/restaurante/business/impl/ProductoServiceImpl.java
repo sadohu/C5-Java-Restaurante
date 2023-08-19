@@ -1,10 +1,19 @@
 package com.web.restaurante.business.impl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.model.Producto;
+import com.web.restaurante.model.Producto_Pedido;
 import com.web.restaurante.repository.ProductoRepository;
+
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
@@ -48,6 +57,8 @@ public class ProductoServiceImpl implements ProductoService {
 			
 			repository.deleteById(id);	
 		}
+		
+		
 
 
 }

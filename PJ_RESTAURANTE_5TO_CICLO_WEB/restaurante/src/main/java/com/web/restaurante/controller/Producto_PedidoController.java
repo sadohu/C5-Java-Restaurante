@@ -28,8 +28,17 @@ public class Producto_PedidoController {
 		
 		List<Producto_Pedido> listaProducto_pedido = producto_PedidoService.listarPorPedido(pedido) ;
 		
+		double totalPagar = 0.00;
+		
+		for(Producto_Pedido producto : listaProducto_pedido) {
+			totalPagar += producto.getCantidadProducto() * producto.getProducto().getPreciouniProducto();
+		}
+		
 		model.addAttribute("listaProducto_pedido",listaProducto_pedido);
 		model.addAttribute("idPedido", id);
+		model.addAttribute("totalPagar",totalPagar);
+		
+		
 		return "/listaProducto_pedido";
 	}
 }

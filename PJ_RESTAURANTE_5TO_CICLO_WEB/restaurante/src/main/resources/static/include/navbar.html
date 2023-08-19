@@ -41,9 +41,8 @@
 			<li class="nav-item">
 				<a class="nav-link" th:href="@{/listaPedido}">PEDIDO</a>
 			</li>
-
 			<li class="nav-item">
-				<a class="nav-link" href="/comentario">COMENTARIOS</a>
+				<a class="nav-link" href="/comentario" data-bs-toggle="offcanvas" data-bs-target="#comentarios">COMENTARIOS</a>
 			</li>
 			
 		</ul>
@@ -74,13 +73,18 @@
 					<li th:if="${session.usuario}!=null" class="">
 						<a class="dropdown-item" th:href="@{/actualizaUsuario/{id}(id=${session.usuario.idUsuario})}">DATOS</a>
 					</li>
-					<li class="">
+					<li th:if="${session.usuario}!=null" class="">
 						<a class="dropdown-item" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>
 					</li>
-					<li class="">
+					<li th:if="${session.usuario}==null" class="">
+						<a class="dropdown-item" href="/logout">INICIAR SESION</a>
+					</li>
+					<li th:if="${session.usuario}!=null" class="">
 						<a class="dropdown-item" href="/logout">CERRAR SESION</a>
 					</li>
-
+					<li th:if="${session.usuario}!=null" >
+						<a class="dropdown-item" href="/comentario">ENVIAR COMENTARIOS</a>
+					</li>
 				</ul>
 
 			</div>
@@ -89,3 +93,30 @@
 	</nav>
 
 </div>
+
+
+<div>
+	
+	<div class="offcanvas offcanvas-end "  id="comentarios">
+		
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title">LISTA DE COMENTARIOS</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div th:insert="comentario::fragComentarios"></div>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+
+
+

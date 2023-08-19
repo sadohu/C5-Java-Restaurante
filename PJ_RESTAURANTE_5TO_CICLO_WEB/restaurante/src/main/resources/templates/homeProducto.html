@@ -8,25 +8,6 @@
 <body class="text-bg-dark bg-opacity-75">
 	<div th:replace="../static/include/navbar"></div>
 
-	<!-- Modal -->
-	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="w-100 pt-1 mb-5 text-right">
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<form action="" method="get" class="modal-content modal-body border-0 p-0">
-				<div class="input-group mb-2">
-					<input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-					<button type="submit" class="input-group-text bg-success text-light">
-						<i class="fa fa-fw fa-search text-white"></i>
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-
 
 	<!-- Start Content -->
 	<div class="container-fluid py-5 ">
@@ -48,14 +29,7 @@
 			<!--lista de productos -->
 			<div class="col-lg-10 row gap-4">
 
-				<div class="col-12">
-					<form>
-						<div class="col-4">
-							<label>FILTRO DE BUSQUEDA</label>
-							<input type="text" class="form form-control" />
-						</div>
-					</form>
-				</div>
+
 
 				<div class="col-12">
 					<div th:if="${listaProductos}" class="row row-cols-4 g-4">
@@ -67,18 +41,48 @@
 								</div>
 								<div class="card-img-top">
 									<img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/p2.jpg?quality=80&strip=all"
-										width="100%" height="250px" />
+										width="100%" height="200px" />
 								</div>
 								<div class="card-body ">
-									<h6>DESCRIPCION:</h6>
-									<p th:text="${producto.desProducto}"></ol>
-									<h6>PRECIO: </h6>
-									<p th:text="${producto.preciouniProducto}"></ol>
-									<h6>STOCK: </h6>
-									<p th:text="${producto.stockProducto}"></p>
-									<div>
-										<a th:href="@{/agregarCarro{id}(id=${producto.idProducto})}" class="btn btn-success">AGREGAR</a>
+									<div class="d-flex flex-column gap-2">
+										<div clas="row">
+											<h6>DESCRIPCION:</h6>
+											<div th:text="${producto.desProducto}"></div>
+										</div>
+										<div class="row">
+											<div class="col-5">
+												<h6>PRECIO: </h6>
+												<h6>STOCK: </h6>
+											</div>
+											<div class="col">
+												<div th:text="'S/. ' + ${producto.preciouniProducto}"></div>
+												<div th:text="${producto.stockProducto}"></div>
+											</div>
+										</div>
+										<div class="row row-cols-auto">
+											<div class="col-7">
+												<form th:action="@{/agregarCarro/{id}(id=${producto.idProducto})}"
+													th:object="${productoPedido}" method="post">
+													<div class="row row-cols-auto g-2">
+														<div class="col-lg">
+															<button type="submit" class="btn btn-success">AGREGAR</button>
+														</div>
+
+														<div class="col-lg">
+															<input th:field="*{cantidadProducto}" type="number"
+																class="form-control" />
+														</div>
+													</div>
+												</form>
+											</div>
+
+											<div class="col-5" th:if="${producto.idProducto} ==  ${idProducto}">
+												<div class="fw-bold text-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+											</div>
+
+										</div>
 									</div>
+
 								</div>
 							</div>
 

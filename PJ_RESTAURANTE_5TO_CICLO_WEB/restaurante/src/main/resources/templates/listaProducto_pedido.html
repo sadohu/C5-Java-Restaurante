@@ -27,6 +27,7 @@
 								<th>DESCRIPCION</th>
 								<th>PRECIO</th>
 								<th>CANTIDAD</th>
+								<th>TOTAL</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,8 +37,15 @@
 								<td th:text="${productoPedido.producto.desProducto}"></td>
 								<td th:text="${productoPedido.producto.preciouniProducto}"></td>
 								<td th:text="${productoPedido.cantidadProducto}"></td>
+								<td th:text="'S/. ' + ${productoPedido.producto.preciouniProducto} * ${productoPedido.cantidadProducto} ">></td>
 							</tr>
 						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="5">TOTAL</th>
+								<th th:text="'S/. ' + ${totalPagar}"></th>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 			</div>
