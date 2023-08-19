@@ -36,6 +36,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void registrarUsuario(Usuario obj) {
 		Usuario usuario=new Usuario();
+		usuario.setIdUsuario(obj.getIdUsuario());
 		usuario.setPasswordUsuario(passwordEncoder.encode(obj.getPasswordUsuario()));
 		usuario.setNomUsuario(obj.getNomUsuario());
 		usuario.setApeUsuario(obj.getApeUsuario());

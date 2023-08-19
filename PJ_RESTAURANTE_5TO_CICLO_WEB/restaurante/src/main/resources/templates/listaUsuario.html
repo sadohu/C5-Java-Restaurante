@@ -19,12 +19,11 @@
 		<div class="my-4">
 			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
 				href="agregarUsuario">NUEVO USUARIO</a>
-			<a class="btn btn-success" th:href="@{registraUsuario}">NUEVO USUARIO</a>
+				
 		</div>
 
-		<div class="my-4">
-			<a class="btn btn-primary" th:href="@{/logout}">CERRAR SESION</a>
-		</div>
+		
+		<div th:if="${mensaje}" th:text="${mensaje}" class="alert alert-warning"></div>
 
 		<div class="card table-responsive">
 			<table class="table table-bordered">
@@ -71,12 +70,13 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header text-bg-danger">
-					<h2 class="modal-title fs-5">USUARIO</h2>
+					<h2 class="modal-title fs-5">NUEVO USUARIO</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					
 					<section th:insert="registraUsuario::fragGestionUsuario"></section>
+					
 				</div>
 			</div>
 		</div>

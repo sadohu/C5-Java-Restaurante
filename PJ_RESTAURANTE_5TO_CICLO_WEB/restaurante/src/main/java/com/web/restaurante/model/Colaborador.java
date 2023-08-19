@@ -2,6 +2,9 @@ package com.web.restaurante.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,4 +54,8 @@ public class Colaborador implements Serializable {
 	private Date fechaactColaborador;
 	@Column(name = "estado_colaborador")
 	private String estadoColaborador;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "colaboradorRepartidor")
+	private List<Pedido> listaPedido ;
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlsn:th = "http://www.thymleaf.org">
+	<head>
+		<div th:replace="../static/include/head"></div>
+		<title>PRODUCTOS DE PEDIDO</title>
+	</head>
+	<body>
+		<div th:replace="../static/include/navbar"></div>
+		<div class="container">
+			
+			<div class="mt-4">
+				<h2>DETALLE DEL PEDIDO NRO <span th:text="${idPedido}"></span></h2>
+				<hr>
+			</div>
+			
+			<div>
+				<a class="btn btn-danger btn-sm" th:href="@{/listaPedido}">REGRESAR</a>
+			</div>
+			
+			<div>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>NOMBRE</th>
+								<th>DESCRIPCION</th>
+								<th>PRECIO</th>
+								<th>CANTIDAD</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="productoPedido : ${listaProducto_pedido}">
+								<td th:text="${productoPedido.idProductoPedido}"></td>
+								<td th:text="${productoPedido.producto.nomProducto}"></td>
+								<td th:text="${productoPedido.producto.desProducto}"></td>
+								<td th:text="${productoPedido.producto.preciouniProducto}"></td>
+								<td th:text="${productoPedido.cantidadProducto}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

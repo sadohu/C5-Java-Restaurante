@@ -17,7 +17,7 @@
 			
 			<div>	
 				<div>
-					<form action="/guardarPedido" th:object="${pedido}" method="post">
+					<form action="guardarPedido" th:object="${pedido}" method="post">
 						<div class="d-flex flex-column gap-4">
 							
 							
@@ -25,10 +25,6 @@
 								<div class="col" th:if="*{idPedido}!=0">
 									<lable>ID</lable>
 									<input readonly class="form-control" type="text" th:field="*{idPedido}" />
-								</div>
-								<div class="col">
-									<lable>USUARIO</lable>
-									<input readonly class="form-control" type="text"  th:field="*{usuarioCliente.nomUsuario}" />
 								</div>
 								<div class="col">
 									<lable>FECHA REGISTRO</lable>
@@ -44,13 +40,21 @@
 								
 								<div>
 									<lable>DIRECCION</lable>
-									<input class="form-control" type="text" th:field="*{direntregaUsuario.desDirentrega}" />
+									<select class="form-select" th:field="*{direntregaUsuario.idDirentrega}">
+										<option  th:each="direntrega : ${listaDirentrega}" th:value="${direntrega.idDirentrega}" th:text="${direntrega.desDirentrega}"></option>
+									</select>
+								</div>
+								<div>
+									<lable>REPARTIDOR</lable>
+									<select class="form-select" th:field="*{colaboradorRepartidor.idColaborador}">
+										<option  th:each="colaborador : ${listaColaborador}" th:value="${colaborador.idColaborador}" th:text="${colaborador.nomColaborador}"></option>
+									</select>
 								</div>
 							</div>
 							
 							<div class="row g-2">
 								<div>
-									<a type="submit" class="btn btn-success">AGREGAR PRODUCTOS</a>
+									<button type="submit" class="btn btn-success">AGREGAR PRODUCTOS</button>
 								</div>
 							</div>
 							

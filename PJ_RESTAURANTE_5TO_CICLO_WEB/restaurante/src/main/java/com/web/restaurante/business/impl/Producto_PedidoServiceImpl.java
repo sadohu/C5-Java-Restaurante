@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.web.restaurante.business.Producto_PedidoService;
+import com.web.restaurante.model.Pedido;
 import com.web.restaurante.model.Producto;
 import com.web.restaurante.model.Producto_Pedido;
 import com.web.restaurante.repository.Producto_PedidoRepository;
@@ -47,6 +48,11 @@ public class Producto_PedidoServiceImpl implements Producto_PedidoService {
 	@Override
 	public void agregarProductos(List<Producto_Pedido> productos) {
 		producto_PedidoRepository.saveAll(productos);
+	}
+
+	@Override
+	public List<Producto_Pedido> listarPorPedido(Pedido pedido) {
+		return producto_PedidoRepository.findByPedido(pedido);
 	}
 	
 

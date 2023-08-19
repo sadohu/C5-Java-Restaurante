@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<div  th:replace="../static/include/head"></div>
+	<div th:replace="../static/include/head"></div>
 	<title>USUARIO</title>
 </head>
 
@@ -10,43 +10,45 @@
 	<div th:replace="../static/include/navbar"></div>
 
 	<div class="container bg-light vh-100">
-		<div>
-			<h2>GESTIONAR USUARIO</h2>
+
+		<div class="mt-4">
+			<h2>FORMULARIO REGISTRO</h2>
+			<hr>
 		</div>
 
-		<section th:fragment="fragGestionUsuario">
+		<div th:fragment="fragGestionUsuario">
 
 			<div th:if="${param.success}">
 				<div class="alert alert-info">Se registró correctamente...</div>
 			</div>
-			<div class="card-header">
-				<h3 class="text-center">Formulario Registro Usuario</h3>
-			</div>
-			<div class="card-body">
 
+			<div>
 				<form role="form" method="post" th:action="@{/registraUsuario/guardar}" th:object="${usuario}"
 					enctype="multipart/form-data">
 
 					<div class="d-flex flex-column gap-2">
-						<div class="row row-cols-3 ">
-							<div>
+						
+						<div class="row gy-2">
+							<div th:if="*{idUsuario}!=0" class="col">
 								<label>ID</label>
 								<input class="form-control" th:field="*{idUsuario}" type="text" placeholder="ID"
 									readonly />
 							</div>
-							<div>
+							<div class="col">
 								<label>FECHA REG</label>
 								<input class="form-control" th:field="*{fecharegUsuario}" type="date"
 									placeholder="FECHA" readonly />
 							</div>
-							<div>
+							<div class="col">
 								<label>ESTADO</label>
 								<input class="form-control" th:field="*{estadoUsuario}" type="text" placeholder="ESTADO"
 									readonly />
 							</div>
 						</div>
+						
+						<hr>
 
-						<div class="row row-cols-2 g-2">
+						<div class="row row-cols-2 g-3">
 
 							<div>
 								<label for="nomUsuario">NOMBRE</label>
@@ -119,11 +121,13 @@
 								<input class="form-control" name="imagen" type="file" th:field:"*{imagenUsuario}" />
 							</div>
 						</div>
+						
 						<div>
 							<button class="btn btn-success" type="submit">GRABAR</button>
 							<span>Estás registrado?</span>
-								<a th:href="@{/login}">Ingresar aquí</a>
+							<a th:href="@{/login}">Ingresar aquí</a>
 						</div>
+						
 					</div>
 
 				</form>

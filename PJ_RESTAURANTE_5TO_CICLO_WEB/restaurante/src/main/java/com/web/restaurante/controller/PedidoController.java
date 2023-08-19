@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exolab.castor.types.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.restaurante.business.ColaboradorService;
+import com.web.restaurante.business.Direntrega_UsuarioService;
 import com.web.restaurante.business.PedidoService;
 import com.web.restaurante.business.ProductoService;
 import com.web.restaurante.business.Producto_PedidoService;
 import com.web.restaurante.business.UsuarioService;
+import com.web.restaurante.model.Colaborador;
+import com.web.restaurante.model.Direntrega_Usuario;
 import com.web.restaurante.model.Pedido;
 import com.web.restaurante.model.Producto;
 import com.web.restaurante.model.Producto_Pedido;
@@ -41,10 +45,13 @@ public class PedidoController {
 	private Producto_PedidoService producto_PedidoService;
 	@Autowired
 	private ProductoService productoService;
+	@Autowired
+	private Direntrega_UsuarioService direntrega_UsuarioService;
 	
 	@GetMapping("/listaPedido")
 	public String listadoPedido(Model model) {
 		List<Pedido> listaPedido = pedidoService.listarPedido();
+		
 		model.addAttribute("listaPedido",listaPedido);
 		model.addAttribute("Base64",new EncodeBase64());
 		return "listaPedido";
@@ -52,44 +59,54 @@ public class PedidoController {
 	
 	@GetMapping("/nuevoPedido")
 	public String registroPedidoFormulario(Model model, HttpSession session) {
-		Usuario usuarioSession =(Usuario)session.getAttribute("usuario");
 		
 		Pedido pedido = new Pedido();
 		pedido.setEstadoPedido("ACTIVO");
 		pedido.setFecharegPedido(new Date(new java.util.Date().getTime()));
 		
-		if(usuarioSession!=null) {
-			pedido.setUsuarioCliente(usuarioSession);
-		}
 		
+		List<Direntrega_Usuario> listaDirentrega = direntrega_UsuarioService.listar();
+		List<Colaborador> listaColaborador = colaboradorService.listar();
 		
+		model.addAttribute("listaColaborador",listaColaborador);
+		model.addAttribute("listaDirentrega",listaDirentrega);
 		model.addAttribute("pedido",pedido);
+		
 		return "registraPedido";
 	}
 	
 	@PostMapping("/guardarPedido")
 	public String registroPedido(@ModelAttribute("pedido") Pedido pedido,HttpSession session) {
+
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		pedido.setUsuarioCliente(usuario);
+		pedido.setTiempoEntregaPedido(new java.sql.Time(0));
+		pedido.setFechaactPedido(new Date(new java.util.Date().getTime()));
 		
 		pedidoService.registrarPedido(pedido);
 		
+		/*AGREGAMOS LOS PRODUCTOS AL DETALLE DEL PEDIDO*/
 		
-		Producto_Pedido producto_Pedido = new Producto_Pedido();
 		List<Producto> productos = (List<Producto>)session.getAttribute("carrito");
 		
-		pedidoService.registrarPedido(pedido);
-		
+		Producto_Pedido producto_Pedido = new Producto_Pedido();
 		int idProductoPedido=0;
 		
 		for (Producto producto : productos) {
 			idProductoPedido ++;
 			producto_Pedido = new Producto_Pedido();
+			producto_Pedido.setPedido(pedido);
 			producto_Pedido.setIdProductoPedido(idProductoPedido);
 			producto_Pedido.setProducto(producto);
 			producto_Pedido.setCantidadProducto(1);
+
+			producto_PedidoService.agregar(producto_Pedido);
 			
 		}
 		
-	    return "redirect:/";
+		
+	    return "redirect:/listaPedido";
 	}
 	
 	@GetMapping("/actualizarPedido/{id}")
@@ -121,7 +138,7 @@ public class PedidoController {
 			
 		Producto producto = productoService.listaProductoPorId(id);
 		
-		((ArrayList<Producto_Pedido>)session.getAttribute("carrito")).add(producto);
+		((ArrayList<Producto>)session.getAttribute("carrito")).add(producto);
 		
 		
 		return "redirect:/listaProducto/cliente";

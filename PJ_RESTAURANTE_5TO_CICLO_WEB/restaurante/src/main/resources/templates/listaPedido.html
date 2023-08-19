@@ -14,12 +14,7 @@
 	<div class="container pt-3 bg-light vh-100 ">
 		<div>
 			<h2>LISTA DE PEDIDOS</h2>
-		</div>
-
-		<div class="my-4">
-			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarUsuario"
-				href="">NUEVO PEDIDO</a>
-			<a class="btn btn-success" th:href="@{nuevoPedido}">NUEVO PEDIDO</a>
+			<hr>
 		</div>
 
 		<div class="card table-responsive">
@@ -29,10 +24,10 @@
 						<th>ID</th>
 						<th>USUARIO</th>
 						<th>REPARTIDOR</th>
-						<th>APELLIDO</th>
 						<th>FECHA REGISTRO</th>
 						<th>FECHA ACTUALIZACION</th>
 						<th>ESTADO</th>
+						<th>DETALLE</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,108 +38,14 @@
 						<td th:text="${pedido.fecharegPedido}"></td>
 						<td th:text="${pedido.fechaactPedido}"></td>
 						<td th:text="${pedido.estadoPedido}"></td>
+						<td>
+							<a th:href="@{/listaProductoPedido/{id}(id=${pedido.idPedido})}" class="btn btn-warning">DETALLE</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-	</div>
-
-	<!-- INICIAMOS EL MODAL PARA TRATADO DE DATOS -->
-
-	<div class="modal fade modal-lg" id="gestionarUsuario" data-bs-backdrop="static">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header text-bg-danger">
-					<h2 class="modal-title fs-5">USUARIO</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form th:action="@{grabarUsuario}" th:object="${usuario}" method="post">
-
-							<div class="d-flex flex-column gap-3">
-								<div class="row row-cols-3 ">
-									<div>
-										<label>ID</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>FECHA REG</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>ESTADO</label>
-										<input class="form-control" type="text" />
-									</div>
-								</div>
-
-								<div class="row row-cols-2 g-2">
-
-									<div>
-										<label>NOMBRE</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>APELLIDO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>TIPO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>TELEFONO</label>
-										<input class="form-control" type="tel" />
-									</div>
-									<div>
-										<label>CELULAR</label>
-										<input class="form-control" type="tel" />
-									</div>
-									<div>
-										<label>DISTRITO</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>DIRECCION</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>DNI</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>EMAIL</label>
-										<input class="form-control" type="email" />
-									</div>
-									<div>
-										<label>PASSWORD</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div>
-										<label>IMAGEN</label>
-										<input class="form-control" type="file" />
-									</div>
-									<div>
-										<label>ESTADO</label>
-										<input class="form-control" type="text" />
-									</div>
-								</div>
-
-								<div class="modal-footer">
-									<div>
-										<button type=submit class="btn btn-success">GRABAR</button>
-									</div>
-								</div>
-
-							</div>
-
-
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 

@@ -2,9 +2,11 @@ package com.web.restaurante.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import org.hibernate.Remove;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.restaurante.reuzable.PrimaryClustered;
 
 import jakarta.persistence.Column;
@@ -17,6 +19,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,4 +57,8 @@ public class Direntrega_Usuario implements Serializable{
 	private Date fecharegDirentrega;
 	@Column(name="estado_direntrega")
 	private String estadoDirentrega;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "direntregaUsuario")
+	private List<Pedido> listaPedido;
 }

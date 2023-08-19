@@ -71,8 +71,8 @@
 
 				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 
-					<li class="dropdown-item">
-						DATOS
+					<li th:if="${session.usuario}!=null" class="">
+						<a class="dropdown-item" th:href="@{/actualizaUsuario/{id}(id=${session.usuario.idUsuario})}">DATOS</a>
 					</li>
 					<li class="">
 						<a class="dropdown-item" href="/listaDirentrega_usuario">DIRECCION DE ENTREGA</a>

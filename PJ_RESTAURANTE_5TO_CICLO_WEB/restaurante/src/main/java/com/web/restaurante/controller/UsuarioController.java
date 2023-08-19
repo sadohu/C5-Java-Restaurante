@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.Objects;
 import com.web.restaurante.business.DistritoService;
 import com.web.restaurante.business.TipoUsuarioService;
@@ -107,39 +109,43 @@ public class UsuarioController {
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
 		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
 		
-		return "registraUsuario";
+		return "/registraUsuario";
 	}
 	
 	@GetMapping("/actualizaUsuario/{id}")
 	public String actualizaUsuario(@PathVariable(value="id") int id, Model model) {
+		
+		
 		Usuario usuario = service.buscarUsuario(id);
 		
 		model.addAttribute("usuario",usuario);
 		model.addAttribute("listaDistrito",distritoService.listarDistrito());
 		model.addAttribute("listaTipoUsuario",tipoUsuarioService.listarTipoUsuario());
 		
-		return "registraUsuario";
+		
+		return "/registraUsuario";
 	}
 	
 	@PostMapping("/registraUsuario/guardar")
-	public String actualizarUsuario (@RequestParam(name="imagen", required=false) MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario,BindingResult result,Model model) throws IOException {
-		
-		
+	public String actualizarUsuario (MultipartFile imagen ,@ModelAttribute("usuario") Usuario usuario,
+			BindingResult result,Model model,RedirectAttributes flash) throws IOException {
+
 		usuario.setImagenUsuario(imagen.getBytes());
 			
+		/*NO ME PERMITE ACTUALIZAR AL USUARIO*/
 		
 		Usuario usuarioExiste=service.buscarPorEmail(usuario.getEmailUsuario());
-		if(Objects.nonNull(usuarioExiste)) {
+		if(Objects.nonNull(usuarioExiste)&& usuario.getIdUsuario()==0) {
 			result.reject("emailUsuario",null,"Ya existe un usuario con el email proporcionado");
-		} //Fin del If
-		//si hay errores en tema de validacion
+		} 
+		
 		if(result.hasErrors()) {
-			//mandamos por atriibuto usuario el usuarioDto
 			model.addAttribute("usuario",usuario);
-			//y lo enviamos a la vista registro .html
-			return "registraUsuario";
-		} // fin de if hasErrros
+			return "redirect:/registraUsuario";
+		} 
+
 		service.registrarUsuario(usuario);
+		
 		return "redirect:/registraUsuario?success";
 	}
 	

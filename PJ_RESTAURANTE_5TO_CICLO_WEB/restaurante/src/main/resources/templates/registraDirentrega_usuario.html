@@ -10,25 +10,32 @@
 	<div th:replace="../static/include/navbar"></div>
 
 	<div class="container bg-light vh-100">
-		<div>
-			<h2>GESTIONAR DIRECCION DE ENTREGA</h2>
+
+		<div th:if="${session.usuario}!=null" class="row row-cols-auto mt-4">
+			<div class="col">
+				<img th:src="'data:image;base64,' + ${session.imagen}" width="100px" height="100px" />
+			</div>
+			<div class="col fw-bold">
+				<p>NOMBRE: <i th:text="${session.usuario.nomUsuario} + ' ' + ${session.usuario.apeUsuario} "></i> </p>
+				<p>USUARIO: <i th:text="${session.usuario.emailUsuario}"></i> </p>
+				<p>ESTADO: <i th:text="${session.usuario.estadoUsuario}"></i> </p>
+			</div>
 		</div>
 
 		<div>
-			<form th:action="@{/grabarDirentrega_usuario}" th:object="${direntrega_usuario}" method="POST" enctype="multipart/form-data">
+			<h2>GESTIONAR DIRECCION DE ENTREGA</h2>
+			<hr>
+		</div>
 
-				<div>
-					<div>
-						<p>ACA DEBE IR UNA CABECERA CON LOS DATOS DEL USUARIO LOGEADO</p>	
-					</div>
-				</div>
-				
-				
+		<div>
+			<form th:action="@{/grabarDirentrega_usuario}" th:object="${direntrega_usuario}" method="POST"
+				enctype="multipart/form-data">
+
 				<div class="d-flex flex-column gap-2">
-					<div class="row row-cols-3 ">
-						<div>
+					<div class="row row-cols-2 ">
+						<div th:if="*{idDirentrega}!=0">
 							<label>ID</label>
-							<input class="form-control" th:field="*{idDirentrega}" type="text" readonly/>
+							<input class="form-control" th:field="*{idDirentrega}" type="text" readonly />
 						</div>
 						<div>
 							<label>FECHA REG</label>
@@ -36,24 +43,25 @@
 						</div>
 						<div>
 							<label>ESTADO</label>
-							<input class="form-control" th:field="*{estadoDirentrega}" type="text" readonly/>
+							<input class="form-control" th:field="*{estadoDirentrega}" type="text" readonly />
 						</div>
 					</div>
 
 					<div class="row row-cols-2 g-2">
-						
+
 						<div>
 							<label>DISTRITO</label>
 							<select th:field="*{distrito.idDistrito}" class="form-select">
-								<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}" th:text="${distrito.desDistrito}"></option>
+								<option th:each="distrito : ${listaDistrito}" th:value="${distrito.idDistrito}"
+									th:text="${distrito.desDistrito}"></option>
 							</select>
 						</div>
-						
+
 						<div>
 							<label>DESCRIPCION</label>
 							<input class="form-control" th:field="*{desDirentrega}" type="text" />
 						</div>
-						
+
 					</div>
 					<div>
 						<button class="btn btn-success" type="submit">GRABAR</button>
