@@ -42,6 +42,8 @@ public class ColaboradorController {
 		model.addAttribute("listaColaborador",listaColaborador);
 		model.addAttribute("Base64",new EncodeBase64());
 		
+		nuevoColaborador(model);
+		
 		return "listaColaborador";
 	}
 	

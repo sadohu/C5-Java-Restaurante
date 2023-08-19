@@ -49,8 +49,12 @@ public class PedidoController {
 	private Direntrega_UsuarioService direntrega_UsuarioService;
 	
 	@GetMapping("/listaPedido")
-	public String listadoPedido(Model model) {
-		List<Pedido> listaPedido = pedidoService.listarPedido();
+	public String listadoPedido(Model model,HttpSession session) {
+		
+		Usuario usuario = (Usuario)session.getAttribute("usuario");
+		
+		List<Pedido> listaPedido = new ArrayList<>();
+		listaPedido = pedidoService.listarPorUsuario(usuario);
 		
 		model.addAttribute("listaPedido",listaPedido);
 		model.addAttribute("Base64",new EncodeBase64());

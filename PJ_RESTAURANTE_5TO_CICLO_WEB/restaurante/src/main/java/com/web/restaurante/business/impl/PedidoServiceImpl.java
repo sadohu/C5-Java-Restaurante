@@ -76,4 +76,9 @@ public class PedidoServiceImpl implements PedidoService {
 		return ultimoIdPedido;
 	}
 
+	@Override
+	public List<Pedido> listarPorUsuario(Usuario usuario) {
+		return repository.findByUsuarioCliente(usuario);
+	}
+
 }

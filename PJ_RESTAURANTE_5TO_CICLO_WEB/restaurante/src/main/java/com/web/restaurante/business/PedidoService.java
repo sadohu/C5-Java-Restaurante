@@ -2,6 +2,7 @@ package com.web.restaurante.business;
 
 import java.util.List;
 import com.web.restaurante.model.Pedido;
+import com.web.restaurante.model.Usuario;
 
 public interface PedidoService {
 	
@@ -12,4 +13,5 @@ public interface PedidoService {
 	public void registrarPedidos(List<Pedido> pedidos);
 
 	public int buscarUltimoIdPedidoPorUsuario(int id);
+	public List<Pedido> listarPorUsuario(Usuario usuario);
 }
