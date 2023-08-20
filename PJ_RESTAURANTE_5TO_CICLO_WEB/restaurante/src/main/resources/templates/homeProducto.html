@@ -40,29 +40,39 @@
 										</h4>
 								</div>
 								<div class="card-img-top">
-									<img th:if="${producto.imagenProducto}" th:src="@{'data:image;base64,' + ${Base64.encodeAsString(producto.imagenProducto)}}" 
-										width="100%" height="200px"/>
-									
-									<img th:if="!${producto.imagenProducto}" src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/p2.jpg?quality=80&strip=all"
+									<img th:if="${producto.imagenProducto}"
+										th:src="@{'data:image;base64,' + ${Base64.encodeAsString(producto.imagenProducto)}}"
+										width="100%" height="200px" />
+
+									<img th:if="!${producto.imagenProducto}"
+										src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/p2.jpg?quality=80&strip=all"
 										width="100%" height="200px" />
 								</div>
 								<div class="card-body ">
 									<div class="d-flex flex-column gap-2">
 										<div class="row ">
 											<h6>DESCRIPCION:</h6>
-											<div class="overflow-y-auto"  style="height: 100px;">
-												
+											<div class="overflow-y-auto" style="height: 100px;">
+
 												<div th:text="${producto.desProducto}"></div>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-5">
-												<h6>PRECIO: </h6>
-												<h6>STOCK: </h6>
+										<div>
+											<div class="row">
+												<div class="col">
+													<h6>PRECIO: </h6>
+												</div>
+												<div class="col">
+													<div th:text="'S/. ' + ${producto.preciouniProducto}"></div>
+												</div>
 											</div>
-											<div class="col">
-												<div th:text="'S/. ' + ${producto.preciouniProducto}"></div>
-												<div th:text="${producto.stockProducto}"></div>
+											<div class="row">
+												<div class="col">
+													<h6>STOCK: </h6>
+												</div>
+												<div class="col">
+													<div th:text="${producto.stockProducto}"></div>
+												</div>
 											</div>
 										</div>
 										<div class="row row-cols-auto">
@@ -71,7 +81,8 @@
 													th:object="${productoPedido}" method="post">
 													<div class="row row-cols-auto g-2">
 														<div class="col-lg">
-															<button type="submit" class="btn btn-success">AGREGAR</button>
+															<button type="submit"
+																class="btn btn-success">AGREGAR</button>
 														</div>
 
 														<div class="col-lg">
@@ -83,7 +94,8 @@
 											</div>
 
 											<div class="col-5" th:if="${producto.idProducto} ==  ${idProducto}">
-												<div class="fw-bold text-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+												<div class="fw-bold text-success" th:if="${mensaje}"
+													th:text="${mensaje}"></div>
 											</div>
 
 										</div>
