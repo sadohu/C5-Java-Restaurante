@@ -98,6 +98,8 @@ public class PedidoController {
 		
 		List<Producto_Pedido> productos = (List<Producto_Pedido>)session.getAttribute("carrito");
 		
+		Pedido obj = pedidoService.listarPorUsuario(usuario).get(pedidoService.listarPorUsuario(usuario).size()-1);
+		
 		productos.forEach((c)->c.setPedido(pedido));
 		
 		producto_PedidoService.agregarProductos(productos);
@@ -105,6 +107,7 @@ public class PedidoController {
 		/*REMOVEMOS LA SESION DEL CARRITO*/
 		
 		session.removeAttribute("carrito");
+		session.setAttribute("carrito", new ArrayList<Producto_Pedido>());
 		
 	    return "redirect:/listaPedido";
 	}
