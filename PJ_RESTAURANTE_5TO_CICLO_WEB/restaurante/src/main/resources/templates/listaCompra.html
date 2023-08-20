@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="../static/include/head">
+
+	<title>PEDIDO USUARIO</title>
+
+</head>
+
+<body>
+
+	<div th:replace="../static/include/navbar"></div>
+
+	<div class="container pt-3 bg-light">
+		<div>
+			<h2>LISTA DE PEDIDOS</h2>
+			<hr>
+		</div>
+
+		<div class="table-responsive overflow-y-auto border" style="height:600px;">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>PEDIDO</th>
+						<th>TOTAL</th>
+						<th>FECHA</th>
+						<th>ESTADO</th>
+						<th>DETALLE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="compra : ${listaCompra}">
+						<td th:text="${compra.idCompra}"></td>
+						<td th:text="${compra.pedido.idPedido}"></td>
+						<td th:text="${compra.montoCompra}"></td>
+						<td th:text="${compra.fecharegCompra}"></td>
+						<td th:text="${compra.estadoCompra}"></td>
+						<td>
+							<a th:href="@{/listaProductoPedido/{id}(id=${pedido.idPedido})}" class="btn">
+								<img src="https://e7.pngegg.com/pngimages/106/536/png-clipart-computer-icons-icon-design-details-icon-blue-angle.png" width="30px" height="30px"/>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

@@ -53,6 +53,9 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List<Producto_Pedido> listaProducto_Pedido;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List<Compra> listaCompra;
 
 	
 	

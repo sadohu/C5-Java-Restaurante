@@ -12,6 +12,6 @@ public interface PedidoService {
 	public Pedido listaPedidoPorId(int id);
 	public void registrarPedidos(List<Pedido> pedidos);
 
-	public int buscarUltimoIdPedidoPorUsuario(int id);
+	public Pedido buscarUltimoPedidoPorUsuarioCliente(Usuario usuarioCliente);
 	public List<Pedido> listarPorUsuario(Usuario usuario);
 }

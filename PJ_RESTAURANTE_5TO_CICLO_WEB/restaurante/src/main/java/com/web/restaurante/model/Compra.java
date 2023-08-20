@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -18,11 +20,13 @@ public class Compra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_compra")
-	private int id_compra;
-	@Column(name = "id_pedido")
-	private int id_pedido;
-	@Column(name = "id_medio_pago")
-	private int idMedioPago;
+	private int idCompra;
+	@ManyToOne
+	@JoinColumn(name = "id_pedido")
+	private Pedido pedido;
+	@ManyToOne
+	@JoinColumn(name = "id_medio_pago")
+	private MedioPago medioPago;
 	@Column(name = "monto_compra")
 	private double montoCompra;
 	@Column(name = "fechareg_compra")
