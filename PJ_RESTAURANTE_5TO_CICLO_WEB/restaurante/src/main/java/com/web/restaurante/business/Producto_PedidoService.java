@@ -12,4 +12,6 @@ public interface Producto_PedidoService extends CrudDetalle<Producto_Pedido> {
 	public void agregarProductos(List<Producto_Pedido> producto_Pedidos);
 	
 	public List<Producto_Pedido> listarPorPedido (Pedido pedido);
+	
+	public int getMontoTotalPorPedido(Pedido pedido);
 }

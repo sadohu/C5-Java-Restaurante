@@ -54,6 +54,20 @@ public class Producto_PedidoServiceImpl implements Producto_PedidoService {
 	public List<Producto_Pedido> listarPorPedido(Pedido pedido) {
 		return producto_PedidoRepository.findByPedido(pedido);
 	}
+
+	@Override
+	public int getMontoTotalPorPedido(Pedido pedido) {
+		
+		int montoTotal=0;
+		
+		List<Producto_Pedido> listaProductoPedido = producto_PedidoRepository.findByPedido(pedido);
+		
+		for(Producto_Pedido producto : listaProductoPedido) {
+			montoTotal += producto.getCantidadProducto() * producto.getProducto().getPreciouniProducto();
+		}
+		
+		return montoTotal;
+	}
 	
 
 }

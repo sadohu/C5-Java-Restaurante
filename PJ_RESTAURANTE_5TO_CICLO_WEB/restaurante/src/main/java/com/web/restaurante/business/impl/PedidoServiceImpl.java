@@ -1,12 +1,6 @@
 package com.web.restaurante.business.impl;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
-
-import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Service;
 
@@ -14,7 +8,6 @@ import com.web.restaurante.business.PedidoService;
 import com.web.restaurante.model.Pedido;
 import com.web.restaurante.model.Usuario;
 import com.web.restaurante.repository.PedidoRepository;
-import com.web.restaurante.repository.UsuarioRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -23,7 +16,6 @@ import lombok.AllArgsConstructor;
 public class PedidoServiceImpl implements PedidoService {
 
 	private PedidoRepository repository;
-	private UsuarioRepository usuarioRepository;
 	
 	@Override
 	public List<Pedido> listarPedido() {
@@ -56,18 +48,9 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public int buscarUltimoIdPedidoPorUsuario(int id) {
+	public Pedido buscarUltimoPedidoPorUsuarioCliente(Usuario ususarioCliente) {
 		
-		Usuario usuario = usuarioRepository.findByIdUsuario(id);
-		List<Pedido> listaPedidoPorUsuario = repository.findByUsuarioCliente(usuario);
-		
-		int ultimoIdPedido = 0;
-		
-		for (Pedido pedido : listaPedidoPorUsuario) {
-			ultimoIdPedido = pedido.getIdPedido();
-		}
-		
-		return ultimoIdPedido;
+		return repository.findByUsuarioCliente(ususarioCliente).get(repository.findByUsuarioCliente(ususarioCliente).size()-1);
 	}
 
 	@Override
