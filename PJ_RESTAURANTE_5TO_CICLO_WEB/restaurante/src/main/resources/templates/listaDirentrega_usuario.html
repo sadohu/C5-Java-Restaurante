@@ -12,15 +12,12 @@
 
 	<div th:replace="../static/include/navbar"></div>
 
-	<div class="container pt-3 bg-light vh-100 ">
+	<div class="container mt-4">
 		<div>
 			<h2>LISTA DE DIRECCIONES DE ENTREGA</h2>
+			<hr>
 		</div>
 
-		<div class="my-4">
-			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarDirentrega"
-				href="">NUEVA DIRECCION DE ENTREGA</a>
-		</div>
 		
 		<div th:if="${session.usuario}!=null" class="row row-cols-auto mb-4">
 			<div class="col">
@@ -32,9 +29,15 @@
 				<p>ESTADO: <i th:text="${session.usuario.estadoUsuario}" ></i> </p>
 			</div>
 		</div>
+		
+		
+		<div class="my-4">
+			<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gestionarDirentrega"
+				href="">NUEVA DIRECCION DE ENTREGA</a>
+		</div>
 
-		<div class="card table-responsive">
-			<table class="table table-bordered">
+		<div class="table-responsive overflow-y-auto border" style="height: 400px;" >
+			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th class="col-1">#</th>
