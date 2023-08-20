@@ -13,7 +13,7 @@
 	<div class="container my-2">
 		<h1>Registro de Producto</h1>
 
-		<form th:action="@{/guardarProducto}" th:object="${producto}" method="post">
+		<form th:action="@{/guardarProducto}" th:object="${producto}" method="post" enctype="multipart/form-data">
 			<!--el th:field hace referencia al atributo del modelo Producto osea nombre, apellidos,email -->
 			<input type="text" th:field="*{nomProducto}" placeholder="Ingrese nombre" class="form-control mb-4 col-4" />
 			<input type="text" th:field="*{desProducto}" placeholder="Ingrese Descripción"
@@ -22,9 +22,11 @@
 				class="form-control mb-4 col-4" />
 			<input type="text" th:field="*{stockProducto}" placeholder="Ingrese Stock"
 				class="form-control mb-4 col-4" />
-		<!--	<input type="text" th:field="*{imagenProducto}" placeholder="Ingrese Imagen"
+			<!--	<input type="text" th:field="*{imagenProducto}" placeholder="Ingrese Imagen"
 				class="form-control mb-4 col-4" />-->
 			<input type="text" th:field="*{estadoProducto}" placeholder="Ingrese estado"
+				class="form-control mb-4 col-4" />
+			<input type="file"  name="imagen"
 				class="form-control mb-4 col-4" />
 
 			<div class="form-group col-md-6">

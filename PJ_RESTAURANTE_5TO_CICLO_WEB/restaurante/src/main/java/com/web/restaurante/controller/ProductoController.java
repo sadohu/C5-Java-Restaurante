@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -36,10 +40,12 @@ public class ProductoController {
 		model.addAttribute("listaProductos",service.listaProducto());
 		model.addAttribute("listaCategoria",serviceCat.listaCateProducto());
 		
+		
 		Producto_Pedido productoPedido = new Producto_Pedido();
 		productoPedido.setCantidadProducto(1);
 		
 		model.addAttribute("productoPedido",productoPedido);
+		model.addAttribute("Base64",new org.apache.tomcat.util.codec.binary.Base64());
 		
 		if (session.getAttribute("carrito")==null) {
 			session.setAttribute("carrito", new ArrayList<Producto_Pedido>());
@@ -57,7 +63,6 @@ public class ProductoController {
 		//
 		List<CategoriaProducto> dataCat=serviceCat.listaCateProducto();
 		
-		
 		Producto producto=new Producto();
 	
 		model.addAttribute("producto",producto);
@@ -67,11 +72,14 @@ public class ProductoController {
 	}
 
 	@PostMapping("/guardarProducto")
-	public String registroProducto(@ModelAttribute("producto") Producto producto) {
+	public String registroProducto(@ModelAttribute("producto") Producto producto,MultipartFile imagen,
+			Model model) throws IOException {
+		
+		producto.setImagenProducto(imagen.getBytes());
 		
 		service.registrarProducto(producto);
+		
 		return "redirect:/listaProducto/colaborador";
-		/* return "redirect:/"; */
 	}
 	
 	@GetMapping("/actualizaProducto/{id}") 

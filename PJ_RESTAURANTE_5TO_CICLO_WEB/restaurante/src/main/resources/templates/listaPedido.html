@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="card table-responsive">
-			<table class="table table-bordered">
+			<table class="table table-sm">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -39,7 +39,9 @@
 						<td th:text="${pedido.fechaactPedido}"></td>
 						<td th:text="${pedido.estadoPedido}"></td>
 						<td>
-							<a th:href="@{/listaProductoPedido/{id}(id=${pedido.idPedido})}" class="btn btn-warning">DETALLE</a>
+							<a th:href="@{/listaProductoPedido/{id}(id=${pedido.idPedido})}" class="btn">
+								<img src="https://e7.pngegg.com/pngimages/106/536/png-clipart-computer-icons-icon-design-details-icon-blue-angle.png" width="30px" height="30px"/>
+							</a>
 						</td>
 					</tr>
 				</tbody>
