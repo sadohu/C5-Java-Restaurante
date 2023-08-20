@@ -1,5 +1,8 @@
 package com.web.restaurante.business.impl;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,17 +45,8 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Override
 	public Pedido listaPedidoPorId(int id) {
-		// TODO Auto-generated method stub
-		Optional<Pedido> optional = repository.findById(id);
-		Pedido obj = null;
-				
-		if(optional.isPresent()) {
-			obj = optional.get();
-		}else {	
-			JOptionPane.showMessageDialog(null, "Pedido no fue encontrado :'( ");
-		}
 		
-		return obj;
+		return repository.findById(id).get();
 	}
 
 	@Override
@@ -78,7 +72,12 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Override
 	public List<Pedido> listarPorUsuario(Usuario usuario) {
-		return repository.findByUsuarioCliente(usuario);
+		
+		List<Pedido> lista = repository.findByUsuarioCliente(usuario);
+		
+		
+		
+		return lista;
 	}
 
 }

@@ -48,9 +48,12 @@
 								</div>
 								<div class="card-body ">
 									<div class="d-flex flex-column gap-2">
-										<div clas="row">
+										<div class="row ">
 											<h6>DESCRIPCION:</h6>
-											<div th:text="${producto.desProducto}"></div>
+											<div class="overflow-y-auto"  style="height: 100px;">
+												
+												<div th:text="${producto.desProducto}"></div>
+											</div>
 										</div>
 										<div class="row">
 											<div class="col-5">

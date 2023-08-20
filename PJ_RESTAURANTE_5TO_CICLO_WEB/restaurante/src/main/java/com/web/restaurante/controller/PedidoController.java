@@ -102,6 +102,9 @@ public class PedidoController {
 		
 		producto_PedidoService.agregarProductos(productos);
 		
+		/*REMOVEMOS LA SESION DEL CARRITO*/
+		
+		session.removeAttribute("carrito");
 		
 	    return "redirect:/listaPedido";
 	}
