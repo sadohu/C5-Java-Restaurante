@@ -24,7 +24,7 @@ public class Producto_Pedido {
 	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 	@Id
-	@Column(name="id_producto_pedio")
+	@Column(name="id_producto_pedido")
 	private int idProductoPedido;
 	@ManyToOne
 	@JoinColumn(name="id_producto")

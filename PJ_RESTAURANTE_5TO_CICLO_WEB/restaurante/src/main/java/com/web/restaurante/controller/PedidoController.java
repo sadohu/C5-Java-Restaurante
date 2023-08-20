@@ -97,6 +97,7 @@ public class PedidoController {
 		/*AGREGAMOS LOS PRODUCTOS AL DETALLE DEL PEDIDO*/
 		
 		List<Producto_Pedido> productos = (List<Producto_Pedido>)session.getAttribute("carrito");
+		
 		productos.forEach((c)->c.setPedido(pedido));
 		
 		producto_PedidoService.agregarProductos(productos);
